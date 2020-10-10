@@ -15,11 +15,13 @@ class EntryPoint : AppCompatActivity() {
 
         val userInformationDataClass = UserInformationDataClass (
                 phoneNumber = 666,
-                email = "evil@hell.us",
+                emailAddress = "evil@hell.us",
                 username = "Satan666",
         )
 
-        val simpleClass: SimpleClass = SimpleClass(userInformationDataClass)
+        val userInformationProcess: UserInformationProcess = UserInformationProcess(userInformationDataClass)
+
+
 
     }
 
