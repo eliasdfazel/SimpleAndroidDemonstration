@@ -13,7 +13,13 @@ class EntryPoint : AppCompatActivity() {
         entryPointViewBinding = EntryPointViewBinding.inflate(layoutInflater)
         setContentView(entryPointViewBinding.root)
 
+        val userInformationDataClass = UserInformationDataClass (
+                phoneNumber = 666,
+                email = "evil@hell.us",
+                username = "Satan666",
+        )
 
+        val simpleClass: SimpleClass = SimpleClass(userInformationDataClass)
 
     }
 
