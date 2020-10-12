@@ -21,6 +21,7 @@ Third Session;
 6. More In Kotlin | Inheritance
 7. More In Kotlin | Set/Get of Variables & One Line Functions
 8. More In Kotlin | by lazy Class Definition
+9. Simple Talk About User Interface & User Experience
 
 4th Session;
 1. Signing Android Application - Apk & App Bundle
