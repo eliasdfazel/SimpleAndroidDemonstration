@@ -12,11 +12,6 @@ class UserInformationProcess (private val userInformationDataClass: UserInformat
 
     fun onelineFunctionPlus(firstNumber: Int, secondNumber: Int) : Int = firstNumber + secondNumber
 
-    fun normalFunction() : Int {
-
-        return 1 + 9
-    }
-
     /**
      * This Functions is to Save Users Data In Database - Offline
      **/
