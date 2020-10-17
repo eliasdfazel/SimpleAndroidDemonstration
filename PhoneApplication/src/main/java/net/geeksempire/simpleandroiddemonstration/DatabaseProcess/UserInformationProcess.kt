@@ -10,7 +10,7 @@ class UserInformationProcess (private val userInformationDataClass: UserInformat
 
     var somethingNew = 123
 
-    fun onelineFunctionPlus(firstNumber: Int, secondNumber: Int) : Int = firstNumber + secondNumber
+    fun onelineFunctionPlus(firstNumber: Int, secondNumber: Int) : Int = firstNumber.plus(secondNumber)
 
     /**
      * This Functions is to Save Users Data In Database - Offline
