@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import net.geeksempire.simpleandroiddemonstration.DataHolder.UserInformationDataClass
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Utils.doSomething
-import net.geeksempire.simpleandroiddemonstration.Utils.setupUI
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 
 class EntryPoint : AppCompatActivity() {
+
+
 
     private lateinit var entryPointViewBinding: EntryPointViewBinding
 
@@ -16,8 +17,6 @@ class EntryPoint : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         entryPointViewBinding = EntryPointViewBinding.inflate(layoutInflater)
         setContentView(entryPointViewBinding.root)
-
-        setupUI()
 
         val userInformationDataClass = UserInformationDataClass (
                 phoneNumber = "98903666",
