@@ -9,6 +9,33 @@ import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBind
 
 class EntryPoint : AppCompatActivity() {
 
+    //Do Not Consider This DataClass
+    val userInformationDataClass = UserInformationDataClass (
+            phoneNumber = "98903666",
+            emailAddress = "evil@hell.us",
+            username = "Satan666",
+            phoneCountryCode = 98
+    )
+
+
+
+
+
+
+
+
+
+
+
+    val userInformationProcess: UserInformationProcess by lazy {
+
+        UserInformationProcess(userInformationDataClass)
+    }
+
+
+
+
+
 
 
     private lateinit var entryPointViewBinding: EntryPointViewBinding
@@ -25,14 +52,23 @@ class EntryPoint : AppCompatActivity() {
                 phoneCountryCode = 98
         )
 
-        val userInformationProcess: UserInformationProcess = UserInformationProcess(userInformationDataClass)
+//        val userInformationProcess = UserInformationProcess(userInformationDataClass)
 
+        entryPointViewBinding.root.setOnClickListener {
 
+            /*  */
+
+            userInformationProcess.saveUserDataInDatabase()
+
+        }
 
 
         doSomething()
 
 
     }
+
+
+
 
 }
