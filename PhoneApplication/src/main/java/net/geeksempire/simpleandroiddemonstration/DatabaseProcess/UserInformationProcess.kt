@@ -1,5 +1,7 @@
 package net.geeksempire.simpleandroiddemonstration.DatabaseProcess
 
+import android.content.Context
+import android.content.SharedPreferences
 import net.geeksempire.simpleandroiddemonstration.DataHolder.UserInformationDataClass
 
 class UserInformationProcess (private val userInformationDataClass: UserInformationDataClass) {
@@ -15,11 +17,31 @@ class UserInformationProcess (private val userInformationDataClass: UserInformat
     /**
      * This Functions is to Save Users Data In Database - Offline
      **/
-    fun saveUserDataInDatabase() {
+    fun saveUserDataInDatabase(context: Context) {
 
-        userInformationDataClass.username//we will save you in future...
-        userInformationDataClass.emailAddress
-        userInformationDataClass.phoneNumber
+        val preferenceName = userInformationDataClass.username//EliasHussaini123
+        val emailAddress = userInformationDataClass.emailAddress//elias.fazel@gmail.com
+        val phoneNumber = userInformationDataClass.phoneNumber//666
+
+        //EliasHussaini123.xml
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(preferenceName/*Put A Name For File */, Context.MODE_PRIVATE)
+
+        sharedPreferences.edit().let {
+
+            it.putString("EmailAddress", emailAddress)
+            it.putString("PhoneNumber", phoneNumber)
+
+            //Apply To Save
+            it.apply()
+
+        }
+
+        //let
+        //apply
+        //also
+
+
+
 
     }
 
@@ -43,9 +65,13 @@ class UserInformationProcess (private val userInformationDataClass: UserInformat
 
         testArray.forEach { text ->
 
+
+
         }
 
         testArray.forEachIndexed { index, text ->
+
+
 
         }
 

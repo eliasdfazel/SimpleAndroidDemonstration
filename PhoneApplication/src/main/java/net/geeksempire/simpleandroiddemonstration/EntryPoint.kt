@@ -48,7 +48,7 @@ class EntryPoint : AppCompatActivity() {
 
             /*  */
 
-            userInformationProcess.saveUserDataInDatabase()
+            userInformationProcess.saveUserDataInDatabase(applicationContext)
 
         }
 

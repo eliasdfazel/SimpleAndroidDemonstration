@@ -1,3 +1,7 @@
 <resources>
+
     <string name="app_name">Simple Android Demonstration</string>
+
+    <string name="simpleText">Simple Text</string>
+
 </resources>
