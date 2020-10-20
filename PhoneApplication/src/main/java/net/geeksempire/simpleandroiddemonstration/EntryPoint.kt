@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import net.geeksempire.simpleandroiddemonstration.DataHolder.UserInformationDataClass
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
-import net.geeksempire.simpleandroiddemonstration.Utils.doSomething
+import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.addEvil
+import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 
 class EntryPoint : AppCompatActivity() {
@@ -17,33 +18,22 @@ class EntryPoint : AppCompatActivity() {
             phoneCountryCode = 98
     )
 
-
-
-
-
-
-
-
-
-
-
     val userInformationProcess: UserInformationProcess by lazy {
 
         UserInformationProcess(userInformationDataClass)
     }
 
-
-
-
-
-
-
-    private lateinit var entryPointViewBinding: EntryPointViewBinding
+    lateinit var entryPointViewBinding: EntryPointViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         entryPointViewBinding = EntryPointViewBinding.inflate(layoutInflater)
         setContentView(entryPointViewBinding.root)
+
+        setupColorsOfViews()
+
+        val text: String = "Elias"
+        println(text.addEvil()) //It Will Print >> Elias666
 
         val userInformationDataClass = UserInformationDataClass (
                 phoneNumber = "98903666",
@@ -63,12 +53,9 @@ class EntryPoint : AppCompatActivity() {
         }
 
 
-        doSomething()
+
 
 
     }
-
-
-
 
 }
