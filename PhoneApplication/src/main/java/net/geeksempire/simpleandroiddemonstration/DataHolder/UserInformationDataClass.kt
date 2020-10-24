@@ -1,7 +1,7 @@
 package net.geeksempire.simpleandroiddemonstration.DataHolder
 
-data class UserInformationDataClass (var username: String,
+data class UserInformationDataClass (var uniqueUsername: String,
                                      var emailAddress: String,
                                      var phoneNumber: String,
-                                     var phoneCountryCode: Int
+                                     var phoneCountryCode: String = "0098" // Default Value
 )
