@@ -14,6 +14,7 @@
         android:layout_marginVertical="19dp"
         android:lines="1"
         android:maxLength="13"
+        android:hint="@string/typeUsername"
 
         apps:layout_constraintTop_toTopOf="parent"/>
 
@@ -25,6 +26,7 @@
         android:layout_marginVertical="19dp"
         android:lines="1"
         android:inputType="textEmailAddress"
+        android:hint="@string/typeEmailAddress"
 
         apps:layout_constraintTop_toBottomOf="@id/usernameView"/>
 
@@ -36,6 +38,7 @@
         android:layout_marginVertical="19dp"
         android:lines="1"
         android:inputType="phone"
+        android:hint="@string/typePhoneNumber"
 
         apps:layout_constraintTop_toBottomOf="@id/emailAddressView"/>
 

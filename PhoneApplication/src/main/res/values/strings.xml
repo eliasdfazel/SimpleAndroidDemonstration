@@ -4,4 +4,8 @@
 
     <string name="addNewUser">Add New</string>
 
+    <string name="typeUsername">Type Username</string>
+    <string name="typeEmailAddress">Type Email Address</string>
+    <string name="typePhoneNumber">Type Phone Number</string>
+
 </resources>
