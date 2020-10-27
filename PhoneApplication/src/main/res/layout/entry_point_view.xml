@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EntryPoint">
@@ -8,6 +9,26 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+
+        android:paddingHorizontal="13dp"
+        android:paddingVertical="19dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addNewUser"
+        android:layout_width="173dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="23dp"
+        android:textAllCaps="false"
+        android:text="@string/addNewUser"
+        android:textSize="17sp"
+
+        apps:cornerRadius="51dp"
+        apps:icon="@android:drawable/ic_input_add"
+        apps:iconGravity="textStart"
+
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

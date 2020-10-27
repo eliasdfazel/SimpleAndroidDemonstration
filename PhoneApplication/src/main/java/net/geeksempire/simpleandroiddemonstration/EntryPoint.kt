@@ -1,5 +1,6 @@
 package net.geeksempire.simpleandroiddemonstration
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
+import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 
 class EntryPoint : AppCompatActivity() {
 
-    val userInformationProcess: UserInformationProcess = UserInformationProcess()
+    private val userInformationProcess: UserInformationProcess = UserInformationProcess()
 
     lateinit var entryPointViewBinding: EntryPointViewBinding
 
@@ -32,6 +34,11 @@ class EntryPoint : AppCompatActivity() {
         entryPointViewBinding.recyclerView.adapter = allUsersAdapter
 
 
+        entryPointViewBinding.addNewUser.setOnClickListener {
+
+            startActivity(Intent(applicationContext, AddNewUser::class.java))
+
+        }
 
     }
 
