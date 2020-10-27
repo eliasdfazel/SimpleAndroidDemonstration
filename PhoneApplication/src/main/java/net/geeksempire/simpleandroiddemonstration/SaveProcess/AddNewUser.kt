@@ -16,8 +16,6 @@ class AddNewUser : AppCompatActivity() {
         addNewUserViewBinding = AddNewUserViewBinding.inflate(layoutInflater)
         setContentView(addNewUserViewBinding.root)
 
-
-
         addNewUserViewBinding.saveDataView.setOnClickListener {
 
             userInformationProcess.saveUserDataInDatabase(
