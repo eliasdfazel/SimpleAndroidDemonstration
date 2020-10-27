@@ -42,4 +42,25 @@
 
         apps:layout_constraintTop_toBottomOf="@id/emailAddressView"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveDataView"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="19dp"
+        android:textAllCaps="false"
+        android:text="@string/saveData"
+        android:textSize="19sp"
+        android:fontFamily="monospace"
+
+        apps:cornerRadius="15dp"
+        apps:icon="@android:drawable/ic_menu_save"
+        apps:iconGravity="textStart"
+        apps:iconTint="@color/white"
+        apps:iconSize="29dp"
+
+        apps:layout_constraintWidth_percent="0.5"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

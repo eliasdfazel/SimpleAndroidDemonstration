@@ -3,6 +3,7 @@
     <string name="app_name">Simple Android Demonstration</string>
 
     <string name="addNewUser">Add New</string>
+    <string name="saveData">Save</string>
 
     <string name="typeUsername">Type Username</string>
     <string name="typeEmailAddress">Type Email Address</string>

@@ -23,7 +23,9 @@
         android:textAllCaps="false"
         android:text="@string/addNewUser"
         android:textSize="17sp"
+        android:fontFamily="monospace"
 
+        apps:rippleColor="@color/teal_200"
         apps:cornerRadius="51dp"
         apps:icon="@android:drawable/ic_input_add"
         apps:iconGravity="textStart"
