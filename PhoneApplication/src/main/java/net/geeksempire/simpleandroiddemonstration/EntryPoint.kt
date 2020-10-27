@@ -43,6 +43,8 @@ class EntryPoint : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        allUsersAdapter.allUsersData.clear()
+
         allUsersAdapter.allUsersData.addAll(userInformationProcess.realAllSavedData(applicationContext))
 
         entryPointViewBinding.recyclerView.adapter = allUsersAdapter
