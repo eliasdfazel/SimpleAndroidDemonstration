@@ -3,14 +3,16 @@
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootViewItem"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginVertical="3dp"
-    android:layout_marginHorizontal="13dp">
+    android:layout_marginHorizontal="13dp"
+    android:background="@color/teal_200">
 
     <TextView
         android:id="@+id/usernameView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
         android:textSize="15sp"
 
         apps:layout_constraintTop_toTopOf="parent"/>
@@ -19,6 +21,7 @@
         android:id="@+id/emailAddressView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
         android:textSize="15sp"
 
         apps:layout_constraintTop_toBottomOf="@id/usernameView"/>
@@ -27,6 +30,7 @@
         android:id="@+id/phoneNumberView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
         android:textSize="15sp"
 
         apps:layout_constraintTop_toBottomOf="@id/emailAddressView"/>

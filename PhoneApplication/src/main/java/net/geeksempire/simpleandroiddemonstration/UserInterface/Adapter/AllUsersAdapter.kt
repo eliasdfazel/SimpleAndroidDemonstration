@@ -33,7 +33,9 @@ class AllUsersAdapter (val context: Context) : RecyclerView.Adapter<AllUsersView
 
     override fun onBindViewHolder(allUsersViewHolder: AllUsersViewHolder, position: Int) {
 
-        //
+        allUsersViewHolder.usernameView.text = allUsersData[position].uniqueUsername
+        allUsersViewHolder.emailView.text = allUsersData[position].emailAddress
+        allUsersViewHolder.phoneNumberView.text = allUsersData[position].phoneNumber
 
     }
 
