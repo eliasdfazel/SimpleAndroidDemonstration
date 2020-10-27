@@ -3,13 +3,8 @@ package net.geeksempire.simpleandroiddemonstration.DatabaseProcess
 import android.content.Context
 import android.content.SharedPreferences
 import net.geeksempire.simpleandroiddemonstration.DataHolder.UserInformationDataClass
-import java.io.File
 
 class UserInformationProcess (private val userInformationDataClass: UserInformationDataClass) {
-
-    companion object {
-        const val STATIC_PARAMETER = "777"
-    }
 
     init {
 
@@ -24,21 +19,22 @@ class UserInformationProcess (private val userInformationDataClass: UserInformat
      **/
     fun saveUserDataInDatabase(context: Context) {
 
-        val preferenceName = userInformationDataClass.uniqueUsername //EliasHussaini123
+        val preferenceName = "AllUser.xml"
 
-        //EliasHussaini123.xml
+        //AllUsers.xml
         val sharedPreferences: SharedPreferences = context.getSharedPreferences(
-                preferenceName/* Put A Name For File Which Is UnqiueUsername */,
+                preferenceName,
                 Context.MODE_PRIVATE
         )
 
+        val uniqueUsername = userInformationDataClass.uniqueUsername //EliasHussaini123
         val emailAddress = userInformationDataClass.emailAddress //elias.fazel@gmail.com
         val phoneNumber = userInformationDataClass.phoneNumber //666
 
         sharedPreferences.edit().let {
 
-            it.putString("EmailAddress", emailAddress)
-            it.putString("PhoneNumber", phoneNumber)
+            //EliasHussaini123 -> EliasHussaini123|elias.fazel@gmail.com|66666666
+            it.putString(uniqueUsername, "${uniqueUsername}-${emailAddress}-${phoneNumber}")
 
             //Apply To Save
             it.apply()
@@ -51,9 +47,9 @@ class UserInformationProcess (private val userInformationDataClass: UserInformat
 
         val uniqueUsername = preferenceName
 
-        //EliasHussaini123.xml >>> 777EliasHussaini123.xml
+        //AllUsers.xml
         val sharedPreferences: SharedPreferences = context.getSharedPreferences(
-                STATIC_PARAMETER + preferenceName/* Put A Name For File Which Is UnqiueUsername */,
+                preferenceName,
                 Context.MODE_PRIVATE
         )
 
@@ -70,18 +66,27 @@ class UserInformationProcess (private val userInformationDataClass: UserInformat
 
     fun realAllSavedData(context: Context) {
 
-        //shared_prefs
-        val allFilesDirectory = File("/data/data/${context.packageName}/shared_prefs/")
+        //AllUsers.xml
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(
+                "AllUsers.xml",
+                Context.MODE_PRIVATE
+        )
 
-        if (allFilesDirectory.isDirectory) {
+        sharedPreferences.all.keys.forEach { key ->
 
-            allFilesDirectory.listFiles().forEach { aFile ->
+            val allUsersData = sharedPreferences.getString(key, null)
 
-                if (aFile.name.contains(STATIC_PARAMETER)) {
+            allUsersData?.let {
+
+                //EliasHussaini123|elias.fazel@gmail.com|66666666
+
+                val splittedData = allUsersData.split("|")
+
+                val username = splittedData[0]
+                val email = splittedData[1]
+                val phone = splittedData[2]
 
 
-
-                }
 
             }
 
@@ -94,44 +99,6 @@ class UserInformationProcess (private val userInformationDataClass: UserInformat
      **/
     fun searchInDatabase(username: String) {
 
-        val test: String = "TEST"
-
-        repeat(test.length) { index ->
-
-
-
-        }
-
-        val testArray = arrayListOf<String>()
-        testArray.add("one")
-        testArray.add("two")
-        testArray.add("three")
-
-        testArray.forEach { text ->
-
-
-
-        }
-
-        testArray.forEachIndexed { index, text ->
-
-
-
-        }
-
-        for (i in 6 downTo 0 step 2) {
-
-
-        }
-
-        /*for (int i = 0; i < 10; i++) {
-
-        }*/
-
-        /*for (index in 0 until 10) {
-
-
-        }*/
 
     }
 
