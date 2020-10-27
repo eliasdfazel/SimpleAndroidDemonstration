@@ -7,7 +7,7 @@ import net.geeksempire.simpleandroiddemonstration.databinding.AddNewUserViewBind
 
 class AddNewUser : AppCompatActivity() {
 
-    val userInformationProcess: UserInformationProcess = UserInformationProcess()
+    private val userInformationProcess: UserInformationProcess = UserInformationProcess()
 
     lateinit var addNewUserViewBinding: AddNewUserViewBinding
 

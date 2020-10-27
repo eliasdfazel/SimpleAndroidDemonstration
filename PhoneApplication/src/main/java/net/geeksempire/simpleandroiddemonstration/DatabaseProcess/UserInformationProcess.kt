@@ -22,8 +22,8 @@ class UserInformationProcess () {
 
         sharedPreferences.edit().let {
 
-            //uniqueUsername -> uniqueUsername|emailAddress|phoneNumber
-            it.putString(uniqueUsername, "${uniqueUsername}-${emailAddress}-${phoneNumber}")
+            //phoneNumber -> uniqueUsername|emailAddress|phoneNumber
+            it.putString(phoneNumber, "${uniqueUsername}-${emailAddress}-${phoneNumber}")
 
             //Apply To Save
             it.apply()
