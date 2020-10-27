@@ -15,6 +15,10 @@ class EntryPoint : AppCompatActivity() {
 
     private val userInformationProcess: UserInformationProcess = UserInformationProcess()
 
+    private val allUsersAdapter: AllUsersAdapter by lazy {
+        AllUsersAdapter(applicationContext)
+    }
+
     lateinit var entryPointViewBinding: EntryPointViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,18 +31,21 @@ class EntryPoint : AppCompatActivity() {
 
         entryPointViewBinding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
 
-        val allUsersAdapter = AllUsersAdapter(applicationContext)
-
-        allUsersAdapter.allUsersData.addAll(userInformationProcess.realAllSavedData(applicationContext))
-
-        entryPointViewBinding.recyclerView.adapter = allUsersAdapter
-
 
         entryPointViewBinding.addNewUser.setOnClickListener {
 
             startActivity(Intent(applicationContext, AddNewUser::class.java))
 
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        allUsersAdapter.allUsersData.addAll(userInformationProcess.realAllSavedData(applicationContext))
+
+        entryPointViewBinding.recyclerView.adapter = allUsersAdapter
 
     }
 
