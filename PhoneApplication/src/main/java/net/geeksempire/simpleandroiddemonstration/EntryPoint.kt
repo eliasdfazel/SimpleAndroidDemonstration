@@ -71,4 +71,11 @@ class EntryPoint : AppCompatActivity(), PassDataForDeletingProcess {
 
     }
 
+    override fun optionProcess() {
+        super.optionProcess()
+
+
+
+    }
+
 }

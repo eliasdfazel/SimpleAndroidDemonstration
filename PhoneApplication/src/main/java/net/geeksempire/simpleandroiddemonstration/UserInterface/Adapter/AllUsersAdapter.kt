@@ -19,6 +19,12 @@ import net.geeksempire.simpleandroiddemonstration.R
 
 interface PassDataForDeletingProcess {
     fun userData(specificDataKey: String, specificDataPosition: Int)
+
+    fun optionProcess() {
+
+
+
+    }
 }
 
 class AllUsersAdapter (val context: Context,
