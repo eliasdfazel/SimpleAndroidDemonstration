@@ -7,6 +7,17 @@ import net.geeksempire.simpleandroiddemonstration.DataHolder.UserInformationData
 
 class UserInformationProcess () {
 
+    fun deleteSpecificData(context: Context, keyToSharedPreferences: String) {
+
+        //AllUsers.xml
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(
+            "AllUser",
+            Context.MODE_PRIVATE
+        )
+
+        sharedPreferences.edit().remove(keyToSharedPreferences).apply()
+
+    }
 
     /**
      * This Functions is to Save Users Data In Database - Offline
@@ -33,6 +44,8 @@ class UserInformationProcess () {
     }
 
     fun realAllSavedData(context: Context) : ArrayList<UserInformationDataClass> {
+
+        context.deleteSharedPreferences("")
 
         val allUsersDataList: ArrayList<UserInformationDataClass> = ArrayList<UserInformationDataClass>()
 

@@ -2,6 +2,7 @@ package net.geeksempire.simpleandroiddemonstration
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +14,13 @@ import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBind
 
 class EntryPoint : AppCompatActivity() {
 
+    var specificDataKey: String? = null
+    var specificDataPosition: Int? = null
+
     private val userInformationProcess: UserInformationProcess = UserInformationProcess()
 
     private val allUsersAdapter: AllUsersAdapter by lazy {
-        AllUsersAdapter(applicationContext)
+        AllUsersAdapter(this@EntryPoint)
     }
 
     lateinit var entryPointViewBinding: EntryPointViewBinding
@@ -35,6 +39,24 @@ class EntryPoint : AppCompatActivity() {
         entryPointViewBinding.addNewUser.setOnClickListener {
 
             startActivity(Intent(applicationContext, AddNewUser::class.java))
+
+        }
+
+        entryPointViewBinding.deleteView.setOnClickListener {
+
+            if (specificDataKey != null && specificDataPosition != null) {
+
+                userInformationProcess.deleteSpecificData(applicationContext, specificDataKey!!)
+
+//                allUsersAdapter.allUsersData.clear()
+//                allUsersAdapter.allUsersData.addAll(userInformationProcess.realAllSavedData(applicationContext))
+//                allUsersAdapter.notifyDataSetChanged()
+
+                allUsersAdapter.notifyItemRemoved(specificDataPosition!!)
+
+                entryPointViewBinding.deleteView.visibility = View.INVISIBLE
+
+            }
 
         }
 
