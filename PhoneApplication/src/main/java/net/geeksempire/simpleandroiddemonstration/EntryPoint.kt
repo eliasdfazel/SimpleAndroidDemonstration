@@ -48,10 +48,6 @@ class EntryPoint : AppCompatActivity() {
 
                 userInformationProcess.deleteSpecificData(applicationContext, specificDataKey!!)
 
-//                allUsersAdapter.allUsersData.clear()
-//                allUsersAdapter.allUsersData.addAll(userInformationProcess.realAllSavedData(applicationContext))
-//                allUsersAdapter.notifyDataSetChanged()
-
                 allUsersAdapter.notifyItemRemoved(specificDataPosition!!)
 
                 entryPointViewBinding.deleteView.visibility = View.INVISIBLE
