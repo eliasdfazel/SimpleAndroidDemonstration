@@ -28,9 +28,9 @@ class EntryPoint : AppCompatActivity() {
 
         setupColorsOfViews()
 
-
         entryPointViewBinding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
 
+        entryPointViewBinding.recyclerView.adapter = allUsersAdapter
 
         entryPointViewBinding.addNewUser.setOnClickListener {
 
@@ -47,7 +47,7 @@ class EntryPoint : AppCompatActivity() {
 
         allUsersAdapter.allUsersData.addAll(userInformationProcess.realAllSavedData(applicationContext))
 
-        entryPointViewBinding.recyclerView.adapter = allUsersAdapter
+        allUsersAdapter.notifyDataSetChanged()
 
     }
 
