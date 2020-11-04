@@ -7,21 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
+import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassDataForDeletingProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
 import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 
-class EntryPoint : AppCompatActivity() {
-
-    var specificDataKey: String? = null
-    var specificDataPosition: Int? = null
+class EntryPoint : AppCompatActivity(), PassDataForDeletingProcess {
 
     private val userInformationProcess: UserInformationProcess = UserInformationProcess()
 
-    private val allUsersAdapter: AllUsersAdapter by lazy {
-        AllUsersAdapter(this@EntryPoint)
-    }
+    lateinit var allUsersAdapter: AllUsersAdapter
 
     lateinit var entryPointViewBinding: EntryPointViewBinding
 
@@ -32,6 +28,8 @@ class EntryPoint : AppCompatActivity() {
 
         setupColorsOfViews()
 
+        allUsersAdapter = AllUsersAdapter(applicationContext, this@EntryPoint)
+
         entryPointViewBinding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
 
         entryPointViewBinding.recyclerView.adapter = allUsersAdapter
@@ -39,20 +37,6 @@ class EntryPoint : AppCompatActivity() {
         entryPointViewBinding.addNewUser.setOnClickListener {
 
             startActivity(Intent(applicationContext, AddNewUser::class.java))
-
-        }
-
-        entryPointViewBinding.deleteView.setOnClickListener {
-
-            if (specificDataKey != null && specificDataPosition != null) {
-
-                userInformationProcess.deleteSpecificData(applicationContext, specificDataKey!!)
-
-                allUsersAdapter.notifyItemRemoved(specificDataPosition!!)
-
-                entryPointViewBinding.deleteView.visibility = View.INVISIBLE
-
-            }
 
         }
 
@@ -66,6 +50,24 @@ class EntryPoint : AppCompatActivity() {
         allUsersAdapter.allUsersData.addAll(userInformationProcess.realAllSavedData(applicationContext))
 
         allUsersAdapter.notifyDataSetChanged()
+
+    }
+
+    override fun userData(specificDataKey: String, specificDataPosition: Int) {
+
+        entryPointViewBinding.deleteView.visibility = View.VISIBLE
+
+        entryPointViewBinding.deleteView.setOnClickListener {
+
+            allUsersAdapter.allUsersData.removeAt(specificDataPosition)
+
+            userInformationProcess.deleteSpecificData(applicationContext, specificDataKey)
+
+            allUsersAdapter.notifyItemRemoved(specificDataPosition)
+
+            entryPointViewBinding.deleteView.visibility = View.INVISIBLE
+
+        }
 
     }
 

@@ -10,21 +10,25 @@
 
 package com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights
 
+import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import net.geeksempire.simpleandroiddemonstration.DataHolder.UserInformationDataClass
-import net.geeksempire.simpleandroiddemonstration.EntryPoint
 import net.geeksempire.simpleandroiddemonstration.R
 
-class AllUsersAdapter (val entryPoint: EntryPoint) : RecyclerView.Adapter<AllUsersViewHolder>() {
+interface PassDataForDeletingProcess {
+    fun userData(specificDataKey: String, specificDataPosition: Int)
+}
+
+class AllUsersAdapter (val context: Context,
+                       val passDataForDeletingProcess: PassDataForDeletingProcess) : RecyclerView.Adapter<AllUsersViewHolder>() {
 
     val allUsersData: ArrayList<UserInformationDataClass> = ArrayList<UserInformationDataClass>()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): AllUsersViewHolder {
 
-        return AllUsersViewHolder(LayoutInflater.from(entryPoint).inflate(R.layout.add_new_user_view_item, viewGroup, false))
+        return AllUsersViewHolder(LayoutInflater.from(context).inflate(R.layout.add_new_user_view_item, viewGroup, false))
     }
 
     override fun getItemCount(): Int {
@@ -46,10 +50,10 @@ class AllUsersAdapter (val entryPoint: EntryPoint) : RecyclerView.Adapter<AllUse
 
         allUsersViewHolder.rootViewItem.setOnLongClickListener {
 
-            entryPoint.specificDataPosition = position
-            entryPoint.specificDataKey = allUsersData[position].phoneNumber
-
-            entryPoint.entryPointViewBinding.deleteView.visibility = View.VISIBLE
+            passDataForDeletingProcess.userData(
+                allUsersData[position].phoneNumber,
+                position
+            )
 
             true
         }
