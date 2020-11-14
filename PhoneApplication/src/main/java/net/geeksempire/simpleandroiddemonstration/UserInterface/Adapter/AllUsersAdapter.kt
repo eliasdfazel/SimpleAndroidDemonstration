@@ -17,12 +17,12 @@ import androidx.recyclerview.widget.RecyclerView
 import net.geeksempire.simpleandroiddemonstration.DataHolder.UserInformationDataClass
 import net.geeksempire.simpleandroiddemonstration.R
 
-interface PassDataForDeletingProcess {
-    fun userData(specificDataKey: String, specificDataPosition: Int)
+interface PassUserDataProcess {
+    fun userDataToDelete(specificDataKey: String, specificDataPosition: Int)
 }
 
 class AllUsersAdapter (val context: Context,
-                       val passDataForDeletingProcess: PassDataForDeletingProcess) : RecyclerView.Adapter<AllUsersViewHolder>() {
+                       val passUserDataProcess: PassUserDataProcess) : RecyclerView.Adapter<AllUsersViewHolder>() {
 
     val allUsersData: ArrayList<UserInformationDataClass> = ArrayList<UserInformationDataClass>()
 
@@ -61,7 +61,7 @@ class AllUsersAdapter (val context: Context,
 
         allUsersViewHolder.rootViewItem.setOnLongClickListener {
 
-            passDataForDeletingProcess.userData(
+            passUserDataProcess.userDataToDelete(
                 allUsersData[position].phoneNumber,
                 position
             )

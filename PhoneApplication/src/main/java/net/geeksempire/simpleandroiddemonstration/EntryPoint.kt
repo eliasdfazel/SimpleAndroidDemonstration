@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
-import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassDataForDeletingProcess
+import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassUserDataProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
 import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 
-class EntryPoint : AppCompatActivity(), PassDataForDeletingProcess {
+class EntryPoint : AppCompatActivity(), PassUserDataProcess {
 
     private val userInformationProcess: UserInformationProcess = UserInformationProcess()
 
@@ -53,7 +53,7 @@ class EntryPoint : AppCompatActivity(), PassDataForDeletingProcess {
 
     }
 
-    override fun userData(specificDataKey: String, specificDataPosition: Int) {
+    override fun userDataToDelete(specificDataKey: String, specificDataPosition: Int) {
 
         entryPointViewBinding.deleteView.visibility = View.VISIBLE
 
