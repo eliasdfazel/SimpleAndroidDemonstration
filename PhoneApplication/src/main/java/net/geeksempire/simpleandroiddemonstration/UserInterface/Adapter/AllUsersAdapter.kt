@@ -40,11 +40,11 @@ class AllUsersAdapter (val context: Context,
 
         if (payloads.isNotEmpty()) {
 
-//            allUsersViewHolder.usernameView.text = allUsersData[position].uniqueUsername
-//
-//            allUsersViewHolder.emailView.text = allUsersData[position].emailAddress
-//
-//            allUsersViewHolder.phoneNumberView.text = allUsersData[position].phoneNumber
+            allUsersViewHolder.usernameView.text = allUsersData[position].uniqueUsername
+
+            allUsersViewHolder.emailView.text = allUsersData[position].emailAddress
+
+            allUsersViewHolder.phoneNumberView.text = allUsersData[position].phoneNumber
 
         } else {
             super.onBindViewHolder(allUsersViewHolder, position, payloads)
