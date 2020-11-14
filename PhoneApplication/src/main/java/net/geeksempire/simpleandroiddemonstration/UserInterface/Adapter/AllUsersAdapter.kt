@@ -19,12 +19,6 @@ import net.geeksempire.simpleandroiddemonstration.R
 
 interface PassDataForDeletingProcess {
     fun userData(specificDataKey: String, specificDataPosition: Int)
-
-    fun optionProcess() {
-
-
-
-    }
 }
 
 class AllUsersAdapter (val context: Context,
@@ -40,6 +34,17 @@ class AllUsersAdapter (val context: Context,
     override fun getItemCount(): Int {
 
         return allUsersData.size
+    }
+
+    override fun onBindViewHolder(allUsersViewHolder: AllUsersViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(allUsersViewHolder, position, payloads)
+
+        allUsersViewHolder.usernameView.text = allUsersData[position].uniqueUsername
+
+        allUsersViewHolder.emailView.text = allUsersData[position].emailAddress
+
+        allUsersViewHolder.phoneNumberView.text = allUsersData[position].phoneNumber
+
     }
 
     override fun onBindViewHolder(allUsersViewHolder: AllUsersViewHolder, position: Int) {
