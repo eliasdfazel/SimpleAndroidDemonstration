@@ -29,7 +29,6 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
         setupColorsOfViews()
 
-
         allUsersAdapter = AllUsersAdapter(applicationContext, this@EntryPoint)
 
         entryPointViewBinding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)

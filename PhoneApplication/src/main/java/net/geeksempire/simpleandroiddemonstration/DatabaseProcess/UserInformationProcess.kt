@@ -114,7 +114,10 @@ class UserInformationProcess {
             afterBackgroundProcess.notifyUserInterfaceForData()
 
         })
-        loadProcess.start()
+
+        if (!loadProcess.isAlive) {
+            loadProcess.start()
+        }
 
     }
 
