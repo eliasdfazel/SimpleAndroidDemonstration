@@ -110,6 +110,7 @@ class UserInformationProcess {
                     realAllSavedData(entryPoint)
             )
 
+            //Data Is Ready!
             afterBackgroundProcess.notifyUserInterfaceForData()
 
         })
