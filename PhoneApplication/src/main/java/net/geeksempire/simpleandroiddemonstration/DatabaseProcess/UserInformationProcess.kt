@@ -4,8 +4,13 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import net.geeksempire.simpleandroiddemonstration.DataHolder.UserInformationDataClass
+import net.geeksempire.simpleandroiddemonstration.EntryPoint
 
-class UserInformationProcess () {
+interface AfterBackgroundProcess {
+    fun notifyUserInterfaceForData()
+}
+
+class UserInformationProcess {
 
     fun deleteSpecificData(context: Context, keyToSharedPreferences: String) {
 
@@ -91,6 +96,24 @@ class UserInformationProcess () {
      **/
     fun searchInDatabase(username: String) {
 
+
+    }
+
+    fun setupAdapterData(entryPoint: EntryPoint, afterBackgroundProcess: AfterBackgroundProcess) {
+
+        //Thread is Loading Data in Background
+        val loadProcess = Thread(Runnable {
+
+            entryPoint.allUsersAdapter.allUsersData.clear()
+
+            entryPoint.allUsersAdapter.allUsersData.addAll(
+                    realAllSavedData(entryPoint)
+            )
+
+            afterBackgroundProcess.notifyUserInterfaceForData()
+
+        })
+        loadProcess.start()
 
     }
 

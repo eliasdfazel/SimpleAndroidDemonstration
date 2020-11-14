@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassUserDataProcess
+import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroundProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
 import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 
-class EntryPoint : AppCompatActivity(), PassUserDataProcess {
+class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProcess {
 
-    private val userInformationProcess: UserInformationProcess = UserInformationProcess()
+    val userInformationProcess: UserInformationProcess = UserInformationProcess()
 
     lateinit var allUsersAdapter: AllUsersAdapter
 
@@ -27,6 +28,7 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess {
         setContentView(entryPointViewBinding.root)
 
         setupColorsOfViews()
+
 
         allUsersAdapter = AllUsersAdapter(applicationContext, this@EntryPoint)
 
@@ -45,11 +47,7 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess {
     override fun onResume() {
         super.onResume()
 
-        allUsersAdapter.allUsersData.clear()
-
-        allUsersAdapter.allUsersData.addAll(userInformationProcess.realAllSavedData(applicationContext))
-
-        allUsersAdapter.notifyDataSetChanged()
+        userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
 
     }
 
@@ -66,6 +64,17 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess {
             allUsersAdapter.notifyDataSetChanged()
 
             entryPointViewBinding.deleteView.visibility = View.INVISIBLE
+
+        }
+
+    }
+
+    override fun notifyUserInterfaceForData() {
+
+        runOnUiThread {
+
+            //Foreground
+            allUsersAdapter.notifyDataSetChanged()
 
         }
 
