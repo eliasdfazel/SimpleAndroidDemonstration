@@ -12,6 +12,16 @@ interface AfterBackgroundProcess {
 
 class UserInformationProcess {
 
+    fun databaseSize(context: Context) : Int {
+
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(
+                "AllUser",
+                Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.all.size
+    }
+
     fun deleteSpecificData(context: Context, keyToSharedPreferences: String) {
 
         //AllUsers.xml

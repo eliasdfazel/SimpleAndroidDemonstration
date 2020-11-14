@@ -22,6 +22,8 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
     lateinit var entryPointViewBinding: EntryPointViewBinding
 
+    var databaseSize = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         entryPointViewBinding = EntryPointViewBinding.inflate(layoutInflater)
@@ -41,16 +43,32 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
         }
 
+        userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
+
+        databaseSize = userInformationProcess.databaseSize(applicationContext)
+
     }
 
     override fun onResume() {
         super.onResume()
 
-        userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
+        if (userInformationProcess.databaseSize(applicationContext) > databaseSize) {
+
+            userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
+
+        }
+
+    }
+
+    override fun onBackPressed() {
+
+        entryPointViewBinding.deleteView.visibility = View.INVISIBLE
 
     }
 
     override fun userDataToDelete(specificDataKey: String, specificDataPosition: Int) {
+
+        println("*** 2. ${specificDataKey} -- ${specificDataPosition}")
 
         entryPointViewBinding.deleteView.visibility = View.VISIBLE
 
@@ -58,12 +76,12 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
             allUsersAdapter.allUsersData.removeAt(specificDataPosition)
 
-            allUsersAdapter.allUsersDataPayload.addAll(allUsersAdapter.allUsersData)
-
             userInformationProcess.deleteSpecificData(applicationContext, specificDataKey)
 
-//            allUsersAdapter.notifyItemRangeChanged(0, (allUsersAdapter.allUsersDataPayload.size), allUsersAdapter.allUsersDataPayload)
-            allUsersAdapter.notifyDataSetChanged()
+            allUsersAdapter.notifyItemRemoved(specificDataPosition)
+            allUsersAdapter.notifyItemRangeChanged(specificDataPosition, allUsersAdapter.allUsersData.size)
+
+            databaseSize = userInformationProcess.databaseSize(applicationContext)
 
             entryPointViewBinding.deleteView.visibility = View.INVISIBLE
 

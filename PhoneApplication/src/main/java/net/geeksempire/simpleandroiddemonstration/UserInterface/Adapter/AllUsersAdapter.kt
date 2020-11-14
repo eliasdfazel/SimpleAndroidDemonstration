@@ -26,8 +26,6 @@ class AllUsersAdapter (val context: Context,
 
     val allUsersData: ArrayList<UserInformationDataClass> = ArrayList<UserInformationDataClass>()
 
-    val allUsersDataPayload: ArrayList<UserInformationDataClass> = ArrayList<UserInformationDataClass>()
-
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): AllUsersViewHolder {
 
         return AllUsersViewHolder(LayoutInflater.from(context).inflate(R.layout.add_new_user_view_item, viewGroup, false))
@@ -40,13 +38,13 @@ class AllUsersAdapter (val context: Context,
 
     override fun onBindViewHolder(allUsersViewHolder: AllUsersViewHolder, position: Int, payloads: MutableList<Any>) {
 
-        if (allUsersDataPayload.isNotEmpty()) {
+        if (payloads.isNotEmpty()) {
 
-            allUsersViewHolder.usernameView.text = allUsersDataPayload[position].uniqueUsername
-
-            allUsersViewHolder.emailView.text = allUsersDataPayload[position].emailAddress
-
-            allUsersViewHolder.phoneNumberView.text = allUsersDataPayload[position].phoneNumber
+//            allUsersViewHolder.usernameView.text = allUsersData[position].uniqueUsername
+//
+//            allUsersViewHolder.emailView.text = allUsersData[position].emailAddress
+//
+//            allUsersViewHolder.phoneNumberView.text = allUsersData[position].phoneNumber
 
         } else {
             super.onBindViewHolder(allUsersViewHolder, position, payloads)
@@ -67,6 +65,8 @@ class AllUsersAdapter (val context: Context,
         }
 
         allUsersViewHolder.rootViewItem.setOnLongClickListener {
+
+            println("*** 1. ${allUsersData[position].phoneNumber} -- ${position}")
 
             passUserDataProcess.userDataToDelete(
                 allUsersData[position].phoneNumber,
