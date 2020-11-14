@@ -39,7 +39,6 @@ class AllUsersAdapter (val context: Context,
     }
 
     override fun onBindViewHolder(allUsersViewHolder: AllUsersViewHolder, position: Int, payloads: MutableList<Any>) {
-        super.onBindViewHolder(allUsersViewHolder, position, payloads)
 
         if (allUsersDataPayload.isNotEmpty()) {
 
@@ -49,6 +48,8 @@ class AllUsersAdapter (val context: Context,
 
             allUsersViewHolder.phoneNumberView.text = allUsersDataPayload[position].phoneNumber
 
+        } else {
+            super.onBindViewHolder(allUsersViewHolder, position, payloads)
         }
 
     }
