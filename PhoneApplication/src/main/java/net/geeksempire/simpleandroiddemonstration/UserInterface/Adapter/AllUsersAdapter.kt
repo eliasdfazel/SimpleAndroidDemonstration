@@ -41,11 +41,15 @@ class AllUsersAdapter (val context: Context,
     override fun onBindViewHolder(allUsersViewHolder: AllUsersViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(allUsersViewHolder, position, payloads)
 
-        allUsersViewHolder.usernameView.text = allUsersDataPayload[position].uniqueUsername
+        if (allUsersDataPayload.isNotEmpty()) {
 
-        allUsersViewHolder.emailView.text = allUsersDataPayload[position].emailAddress
+            allUsersViewHolder.usernameView.text = allUsersDataPayload[position].uniqueUsername
 
-        allUsersViewHolder.phoneNumberView.text = allUsersDataPayload[position].phoneNumber
+            allUsersViewHolder.emailView.text = allUsersDataPayload[position].emailAddress
+
+            allUsersViewHolder.phoneNumberView.text = allUsersDataPayload[position].phoneNumber
+
+        }
 
     }
 
