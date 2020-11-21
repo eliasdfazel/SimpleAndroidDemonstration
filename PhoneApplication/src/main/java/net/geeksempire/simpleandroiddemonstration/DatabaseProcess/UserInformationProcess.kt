@@ -58,7 +58,7 @@ class UserInformationProcess {
 
     }
 
-    fun realAllSavedData(context: Context) : ArrayList<UserInformationDataClass> {
+    fun realAllSavedData(context: Context) : List<UserInformationDataClass> {
 
         context.deleteSharedPreferences("")
 
@@ -98,7 +98,10 @@ class UserInformationProcess {
 
         }
 
-        return allUsersDataList
+        return allUsersDataList.sortedBy {
+
+            it.phoneNumber
+        }
     }
 
     /**
