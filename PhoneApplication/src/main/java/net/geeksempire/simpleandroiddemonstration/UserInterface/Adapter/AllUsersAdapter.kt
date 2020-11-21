@@ -21,6 +21,11 @@ interface PassUserDataProcess {
     fun userDataToDelete(specificDataKey: String, specificDataPosition: Int)
 }
 
+object ViewType {
+    const val TypeMashhad = 0
+    const val TypeTehran = 1
+}
+
 class AllUsersAdapter (val context: Context,
                        val passUserDataProcess: PassUserDataProcess) : RecyclerView.Adapter<AllUsersViewHolder>() {
 
@@ -28,7 +33,21 @@ class AllUsersAdapter (val context: Context,
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): AllUsersViewHolder {
 
-        return AllUsersViewHolder(LayoutInflater.from(context).inflate(R.layout.add_new_user_view_item, viewGroup, false))
+        return if (viewType == ViewType.TypeMashhad) {
+            AllUsersViewHolder(LayoutInflater.from(context).inflate(R.layout.add_new_user_view_item, viewGroup, false))
+        } else {
+            AllUsersViewHolder(LayoutInflater.from(context).inflate(R.layout.add_new_user_view_item_red, viewGroup, false))
+        }
+    }
+
+    override fun getItemViewType(position: Int) : Int {
+        super.getItemViewType(position)
+
+        return if (allUsersData[position].cityName == "Mashhad") {
+            ViewType.TypeMashhad
+        } else {
+            ViewType.TypeTehran
+        }
     }
 
     override fun getItemCount(): Int {

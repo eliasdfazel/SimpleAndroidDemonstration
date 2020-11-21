@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="3dp"
+    android:layout_marginHorizontal="13dp"
+    android:background="#ff0000">
+
+    <TextView
+        android:id="@+id/usernameView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+
+        apps:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/emailAddressView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+
+        apps:layout_constraintTop_toBottomOf="@id/usernameView"/>
+
+    <TextView
+        android:id="@+id/phoneNumberView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+
+        apps:layout_constraintTop_toBottomOf="@id/emailAddressView"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
