@@ -3,6 +3,7 @@ package net.geeksempire.simpleandroiddemonstration
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,6 +47,45 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
         userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
 
         databaseSize = userInformationProcess.databaseSize(applicationContext)
+
+        entryPointViewBinding.searchView.setOnEditorActionListener { view, actionId, keyEvent ->
+
+            when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+
+                    val searchResult = userInformationProcess.searchInDatabase(applicationContext, view.text.toString())
+
+                    if (searchResult.isEmpty()) {
+
+
+
+                    } else {
+
+                        println(">>> >> > ${searchResult}")
+
+                    }
+
+                }
+            }
+
+            false
+        }
+
+        entryPointViewBinding.searchAction.setOnClickListener {
+
+            val searchResult = userInformationProcess
+                    .searchInDatabase(applicationContext, entryPointViewBinding.searchView.text.toString())
+
+            if (searchResult.isEmpty()) {
+
+
+            } else {
+
+                println(">>> >> > ${searchResult}")
+
+            }
+
+        }
 
     }
 

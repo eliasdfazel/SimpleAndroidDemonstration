@@ -9,4 +9,6 @@
     <string name="typeEmailAddress">Type Email Address</string>
     <string name="typePhoneNumber">Type Phone Number</string>
 
+    <string name="typeToSearch">Type To Search</string>
+
 </resources>

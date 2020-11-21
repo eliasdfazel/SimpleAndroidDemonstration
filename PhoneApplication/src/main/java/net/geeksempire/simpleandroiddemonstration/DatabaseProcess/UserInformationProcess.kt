@@ -58,7 +58,7 @@ class UserInformationProcess {
 
     }
 
-    fun realAllSavedData(context: Context) : List<UserInformationDataClass> {
+    fun readAllSavedData(context: Context) : List<UserInformationDataClass> {
 
         context.deleteSharedPreferences("")
 
@@ -107,9 +107,25 @@ class UserInformationProcess {
     /**
      * Search In Database Based on Username
      **/
-    fun searchInDatabase(username: String) {
+    fun searchInDatabase(context: Context, usernameToSearch: String) : List<UserInformationDataClass> {
 
+        val allData = readAllSavedData(context)
 
+        val searchResult = ArrayList<UserInformationDataClass>()
+
+        allData.forEach {
+
+            if (it.uniqueUsername.contains(usernameToSearch)) {
+
+                println("*** ** * ${it}")
+
+                searchResult.add(it)
+
+            }
+
+        }
+
+        return searchResult
     }
 
     fun setupAdapterData(entryPoint: EntryPoint, afterBackgroundProcess: AfterBackgroundProcess) {
@@ -120,7 +136,7 @@ class UserInformationProcess {
             entryPoint.allUsersAdapter.allUsersData.clear()
 
             entryPoint.allUsersAdapter.allUsersData.addAll(
-                    realAllSavedData(entryPoint)
+                    readAllSavedData(entryPoint)
             )
 
             //Data Is Ready!

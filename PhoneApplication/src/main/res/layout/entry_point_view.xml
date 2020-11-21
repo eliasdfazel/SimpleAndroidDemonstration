@@ -14,7 +14,22 @@
 
         apps:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:singleLine="true"
+            android:hint="@string/typeToSearch"
+            android:imeOptions="actionSearch"/>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/searchAction"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_search_category_default"
+
+            apps:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
