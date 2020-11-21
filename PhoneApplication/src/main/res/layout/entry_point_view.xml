@@ -6,13 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".EntryPoint">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/optionMenu"
+        android:layout_width="match_parent"
+        android:layout_height="77dp"
+        android:background="#0090FF"
+
+        apps:layout_constraintTop_toTopOf="parent">
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
+        android:layout_height="0dp"
         android:paddingHorizontal="13dp"
-        android:paddingVertical="19dp"/>
+        android:paddingVertical="19dp"
+
+        apps:layout_constraintTop_toBottomOf="@id/optionMenu"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addNewUser"
