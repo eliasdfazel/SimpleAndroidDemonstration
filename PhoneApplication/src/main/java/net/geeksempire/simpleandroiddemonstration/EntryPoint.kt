@@ -3,6 +3,7 @@ package net.geeksempire.simpleandroiddemonstration
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,6 +73,9 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
         }
 
         entryPointViewBinding.searchAction.setOnClickListener {
+
+            val fadeAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.down_up)
+            entryPointViewBinding.searchAction.startAnimation(fadeAnimation)
 
             val searchResult = userInformationProcess
                     .searchInDatabase(applicationContext, entryPointViewBinding.searchView.text.toString())
