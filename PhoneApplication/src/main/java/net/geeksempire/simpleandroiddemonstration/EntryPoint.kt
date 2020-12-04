@@ -103,7 +103,7 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                //Intrupt the Thread
+                //Interrupt the Thread
 
             }
 
