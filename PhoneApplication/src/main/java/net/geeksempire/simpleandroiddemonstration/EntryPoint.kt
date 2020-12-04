@@ -2,6 +2,9 @@ package net.geeksempire.simpleandroiddemonstration
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
@@ -61,8 +64,8 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
 
                     } else {
+                        Log.d("Search Result", "${searchResult}")
 
-                        println(">>> >> > ${searchResult}")
 
                     }
 
@@ -84,12 +87,33 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
 
             } else {
-
-                println(">>> >> > ${searchResult}")
+                Log.d("Search Result", "${searchResult}")
 
             }
 
         }
+
+        entryPointViewBinding.searchView.addTextChangedListener(object : TextWatcher {
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                //Intrupt the Thread
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                //Call Search Functions and Then Start the Thread
+
+            }
+
+        })
 
     }
 

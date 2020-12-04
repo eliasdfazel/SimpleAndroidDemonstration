@@ -12,6 +12,8 @@ interface AfterBackgroundProcess {
 
 class UserInformationProcess {
 
+    var loadProcessThread: Thread? = null
+
     fun databaseSize(context: Context) : Int {
 
         val sharedPreferences: SharedPreferences = context.getSharedPreferences(
@@ -131,7 +133,7 @@ class UserInformationProcess {
     fun setupAdapterData(entryPoint: EntryPoint, afterBackgroundProcess: AfterBackgroundProcess) {
 
         //Thread is Loading Data in Background
-        val loadProcess = Thread(Runnable {
+        loadProcessThread = Thread(Runnable {
 
             entryPoint.allUsersAdapter.allUsersData.clear()
 
@@ -144,8 +146,8 @@ class UserInformationProcess {
 
         })
 
-        if (!loadProcess.isAlive) {
-            loadProcess.start()
+        if (!loadProcessThread!!.isAlive) {
+            loadProcessThread!!.start()
         }
 
     }
