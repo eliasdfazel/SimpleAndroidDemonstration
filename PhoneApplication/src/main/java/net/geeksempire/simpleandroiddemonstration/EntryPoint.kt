@@ -93,6 +93,10 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
         }
 
+        entryPointViewBinding.searchAction.setColorFilter(R.color.black,
+            android.graphics.PorterDuff.Mode.MULTIPLY)
+        entryPointViewBinding.searchAction.clearColorFilter()
+
         entryPointViewBinding.searchView.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
