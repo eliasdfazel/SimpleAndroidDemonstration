@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="Theme.SimpleAndroidDemonstration" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <item name="android:windowBackground">@color/teal_200</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:statusBarColor">@android:color/holo_orange_light</item>
         <item name="android:navigationBarColor">@android:color/holo_orange_dark</item>
 
