@@ -29,10 +29,42 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
     var databaseSize = 0
 
+
+
+    val hashMap: HashMap<String, String> = HashMap<String, String>()
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         entryPointViewBinding = EntryPointViewBinding.inflate(layoutInflater)
         setContentView(entryPointViewBinding.root)
+
+
+        /*HashMap Samples*/
+        hashMap.put("A-Text-Key"/*Key*/, "Test"/*Value*/)
+
+        hashMap.get("A-Text-Key")
+
+        hashMap.entries.forEach {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         setupColorsOfViews()
 
