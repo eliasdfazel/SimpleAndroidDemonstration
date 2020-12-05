@@ -48,10 +48,18 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
         hashMap.entries.forEach {
 
+            it.key
+
+            it.value
+
         }
 
+        hashMap.replace("A-Key", "A New Value")
 
+        hashMap.entries.sortedByDescending {
 
+            it.value
+        }
 
 
 
