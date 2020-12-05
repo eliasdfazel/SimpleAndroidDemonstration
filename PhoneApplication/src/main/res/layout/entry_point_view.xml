@@ -43,6 +43,11 @@
 
         apps:layout_constraintTop_toBottomOf="@id/optionMenu"/>
 
+    <com.jaredrummler.android.colorpicker.ColorPickerView
+        android:id="@+id/colorPicker"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addNewUser"
         android:layout_width="173dp"

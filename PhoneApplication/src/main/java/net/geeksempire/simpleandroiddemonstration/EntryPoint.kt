@@ -64,16 +64,6 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
 
 
-
-
-
-
-
-
-
-
-
-
         setupColorsOfViews()
 
         allUsersAdapter = AllUsersAdapter(applicationContext, this@EntryPoint)
