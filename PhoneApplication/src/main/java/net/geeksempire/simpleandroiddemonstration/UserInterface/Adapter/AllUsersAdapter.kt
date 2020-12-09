@@ -12,6 +12,7 @@ package com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.Instagr
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import net.geeksempire.simpleandroiddemonstration.DataHolder.UserInformationDataClass
@@ -34,9 +35,13 @@ class AllUsersAdapter (val context: Context,
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): AllUsersViewHolder {
 
         return if (viewType == ViewType.TypeMashhad) {
+
             AllUsersViewHolder(LayoutInflater.from(context).inflate(R.layout.add_new_user_view_item, viewGroup, false))
+
         } else {
+
             AllUsersViewHolder(LayoutInflater.from(context).inflate(R.layout.add_new_user_view_item_red, viewGroup, false))
+
         }
     }
 
@@ -79,18 +84,43 @@ class AllUsersAdapter (val context: Context,
 
         allUsersViewHolder.phoneNumberView.text = allUsersData[position].phoneNumber
 
+        if (allUsersData[position].selectedItem) {
+
+            allUsersViewHolder.selectedItem.visibility = View.VISIBLE
+
+        } else {
+
+            allUsersViewHolder.selectedItem.visibility = View.INVISIBLE
+
+        }
+
+
         allUsersViewHolder.rootViewItem.setOnClickListener {
 
         }
 
         allUsersViewHolder.rootViewItem.setOnLongClickListener {
 
-            println("*** 1. ${allUsersData[position].phoneNumber} -- ${position}")
+            if (allUsersViewHolder.selectedItem.isShown) {
 
-            passUserDataProcess.userDataToDelete(
-                allUsersData[position].phoneNumber,
-                position
-            )
+                allUsersData[position].selectedItem = false
+
+                allUsersViewHolder.selectedItem.visibility = View.INVISIBLE
+
+            } else {
+
+                allUsersData[position].selectedItem = true
+
+                allUsersViewHolder.selectedItem.visibility = View.VISIBLE
+
+            }
+
+//            println("*** 1. ${allUsersData[position].phoneNumber} -- ${position}")
+
+//            passUserDataProcess.userDataToDelete(
+//                allUsersData[position].phoneNumber,
+//                position
+//            )
 
             true
         }

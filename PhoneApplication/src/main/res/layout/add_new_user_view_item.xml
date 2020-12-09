@@ -38,4 +38,14 @@
 
         apps:layout_constraintTop_toBottomOf="@id/emailAddressView"/>
 
+    <ImageView
+        android:id="@+id/selectedItem"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@android:drawable/checkbox_on_background"
+        android:visibility="invisible"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

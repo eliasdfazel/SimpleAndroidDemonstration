@@ -11,6 +11,7 @@
 package com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -24,4 +25,5 @@ class AllUsersViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val usernameView: TextView = view.usernameView
     val emailView: TextView = view.emailAddressView
     val phoneNumberView: TextView = view.phoneNumberView
+    val selectedItem: ImageView = view.selectedItem
 }
