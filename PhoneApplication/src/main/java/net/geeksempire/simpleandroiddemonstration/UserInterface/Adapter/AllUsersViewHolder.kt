@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.add_new_user_view_item.view.*
  **/
 class AllUsersViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val rootViewItem: ConstraintLayout = view.rootViewItem
+    val backgroundItem: ImageView = view.backgroundItem
     val usernameView: TextView = view.usernameView
     val emailView: TextView = view.emailAddressView
     val phoneNumberView: TextView = view.phoneNumberView

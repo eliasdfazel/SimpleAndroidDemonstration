@@ -48,7 +48,7 @@ class AllUsersAdapter (val context: Context,
     override fun getItemViewType(position: Int) : Int {
         super.getItemViewType(position)
 
-        return if (allUsersData[position].cityName == "Mashhad") {
+        return if (position % 2 == 0) {
             ViewType.TypeMashhad
         } else {
             ViewType.TypeTehran
@@ -83,6 +83,8 @@ class AllUsersAdapter (val context: Context,
         allUsersViewHolder.emailView.text = allUsersData[position].emailAddress
 
         allUsersViewHolder.phoneNumberView.text = allUsersData[position].phoneNumber
+
+        allUsersViewHolder.backgroundItem.setImageDrawable(context.getDrawable(android.R.drawable.ic_dialog_map))
 
         if (allUsersData[position].selectedItem) {
 

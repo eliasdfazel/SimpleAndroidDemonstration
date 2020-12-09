@@ -8,6 +8,15 @@
     android:layout_marginHorizontal="13dp"
     android:background="#ff0000">
 
+    <ImageView
+        android:id="@+id/backgroundItem"
+        android:layout_width="match_parent"
+        android:layout_height="123dp"
+        android:src="@android:drawable/ic_search_category_default"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
     <TextView
         android:id="@+id/usernameView"
         android:layout_width="match_parent"
@@ -37,5 +46,15 @@
         android:textColor="@color/black"
 
         apps:layout_constraintTop_toBottomOf="@id/emailAddressView"/>
+
+    <ImageView
+        android:id="@+id/selectedItem"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@android:drawable/checkbox_on_background"
+        android:visibility="invisible"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

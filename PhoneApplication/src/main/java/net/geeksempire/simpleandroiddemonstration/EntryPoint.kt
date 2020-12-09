@@ -9,7 +9,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassUserDataProcess
@@ -68,7 +68,7 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
         allUsersAdapter = AllUsersAdapter(applicationContext, this@EntryPoint)
 
-        entryPointViewBinding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+        entryPointViewBinding.recyclerView.layoutManager = GridLayoutManager(applicationContext, 2, RecyclerView.VERTICAL, false)
 
         entryPointViewBinding.recyclerView.adapter = allUsersAdapter
 
