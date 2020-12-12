@@ -35,30 +35,12 @@ interface DatabaseDAO {
     @Query("SELECT * FROM WidgetData WHERE emailAddress IN (:emailAddress) AND phoneCountryCode IN (:phoneCountryCode)")
     suspend fun loadWidgetByClassNameProviderWidgetSuspend(emailAddress: String, phoneCountryCode: String): DatabaseModel
 
+    @Query("UPDATE WidgetData SET emailAddress = :WidgetId WHERE emailAddress = :emailAddress AND phoneCountryCode == :phoneCountryCode")
+    suspend fun updateWidgetIdByPackageNameClassNameSuspend(WidgetId: Int, emailAddress: String, phoneCountryCode: String): Int
 
+    @Query("DELETE FROM WidgetData WHERE emailAddress = :emailAddress AND phoneCountryCode = :phoneCountryCode")
+    suspend fun deleteByWidgetClassNameProviderWidgetSuspend(emailAddress: String, phoneCountryCode: String)
 
-
-
-
-
-
-
-
-    @Query("UPDATE WidgetData SET WidgetId = :WidgetId WHERE PackageName = :PackageName AND ClassNameProvider == :ClassNameProvider")
-    suspend fun updateWidgetIdByPackageNameClassNameSuspend(PackageName: String, ClassNameProvider: String, WidgetId: Int): Int
-
-
-    @Query("UPDATE WidgetData SET WidgetLabel = :WidgetLabel WHERE WidgetId = :WidgetId")
-    suspend fun updateWidgetLabelByWidgetIdSuspend(WidgetId: Int, WidgetLabel: String): Int
-
-
-    @Query("UPDATE WidgetData SET Recovery = :AddedWidgetRecovery WHERE PackageName= :PackageName AND ClassNameProvider = :ClassNameWidgetProvider")
-    suspend fun updateRecoveryByClassNameProviderWidgetSuspend(PackageName: String, ClassNameWidgetProvider: String, AddedWidgetRecovery: Boolean): Int
-
-
-    @Query("DELETE FROM WidgetData WHERE PackageName = :PackageName AND ClassNameProvider = :ClassNameWidgetProvider")
-    suspend fun deleteByWidgetClassNameProviderWidgetSuspend(PackageName: String, ClassNameWidgetProvider: String)
-
-    @Query("SELECT COUNT(IdKey) FROM WidgetData")
+    @Query("SELECT COUNT(uniqueUsername) FROM WidgetData")
     suspend fun getRowCountSuspend(): Int
 }
