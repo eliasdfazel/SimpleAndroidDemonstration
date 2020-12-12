@@ -36,6 +36,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
     val hashMap: HashMap<String, String> = HashMap<String, String>()
 
+    //Gesture Configuration
     private val swipeGestureListener: SwipeGestureListener by lazy {
         SwipeGestureListener(applicationContext, this@EntryPoint)
     }
@@ -173,6 +174,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
     }
 
+    //Gesture Listener
     override fun onSwipeGesture(gestureConstants: GestureConstants, downMotionEvent: MotionEvent, moveMotionEvent: MotionEvent, initVelocityX: Float, initVelocityY: Float) {
         super.onSwipeGesture(gestureConstants, downMotionEvent, moveMotionEvent, initVelocityX, initVelocityY)
 
@@ -180,12 +182,12 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
             is GestureConstants.SwipeVertical -> {
                 when (gestureConstants.verticallDirection) {
                     GestureListenerConstants.SWIPE_DOWN -> {
-
+                        println("*** Swipe Down ***")
 
 
                     }
                     GestureListenerConstants.SWIPE_UP -> {
-
+                        println("*** Swipe Up ***")
 
 
                     }
@@ -194,12 +196,12 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
             is GestureConstants.SwipeHorizontal -> {
                 when (gestureConstants.horizontalDirection) {
                     GestureListenerConstants.SWIPE_LEFT -> {
-
+                        println("*** Swipe Left ***")
 
 
                     }
                     GestureListenerConstants.SWIPE_RIGHT -> {
-
+                        println("*** Swipe Right ***")
 
 
                     }
