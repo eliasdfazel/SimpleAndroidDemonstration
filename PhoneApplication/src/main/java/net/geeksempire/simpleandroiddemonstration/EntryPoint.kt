@@ -162,9 +162,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
 
         /* Database Example */
-
-        //data class
-        val databseModel: DatabaseModel = DatabaseModel(
+        val databaseModel: DatabaseModel = DatabaseModel(
             uniqueUsername = "666",
             emailAddress = "666@gmail.com",
             phoneNumber = "00666"
@@ -174,7 +172,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
             .build()
 
         widgetDataInterface.initializeDataAccessObject()
-            .insertNewWidgetDataSuspend(databseModel)
+            .insertNewWidgetDataSuspend(databaseModel)
 
         /* Database Example */
     }
