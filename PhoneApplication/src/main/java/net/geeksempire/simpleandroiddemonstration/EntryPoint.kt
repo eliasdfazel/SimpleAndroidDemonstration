@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
@@ -18,8 +19,12 @@ import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformatio
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
 import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
+import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
+import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerConstants
+import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerInterface
+import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.SwipeGestureListener
 
-class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProcess {
+class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataProcess, AfterBackgroundProcess {
 
     val userInformationProcess: UserInformationProcess = UserInformationProcess()
 
@@ -29,11 +34,11 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
     var databaseSize = 0
 
-
-
     val hashMap: HashMap<String, String> = HashMap<String, String>()
 
-
+    private val swipeGestureListener: SwipeGestureListener by lazy {
+        SwipeGestureListener(applicationContext, this@EntryPoint)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -166,6 +171,50 @@ class EntryPoint : AppCompatActivity(), PassUserDataProcess, AfterBackgroundProc
 
         entryPointViewBinding.deleteView.visibility = View.INVISIBLE
 
+    }
+
+    override fun onSwipeGesture(gestureConstants: GestureConstants, downMotionEvent: MotionEvent, moveMotionEvent: MotionEvent, initVelocityX: Float, initVelocityY: Float) {
+        super.onSwipeGesture(gestureConstants, downMotionEvent, moveMotionEvent, initVelocityX, initVelocityY)
+
+        when (gestureConstants) {
+            is GestureConstants.SwipeVertical -> {
+                when (gestureConstants.verticallDirection) {
+                    GestureListenerConstants.SWIPE_DOWN -> {
+
+
+
+                    }
+                    GestureListenerConstants.SWIPE_UP -> {
+
+
+
+                    }
+                }
+            }
+            is GestureConstants.SwipeHorizontal -> {
+                when (gestureConstants.horizontalDirection) {
+                    GestureListenerConstants.SWIPE_LEFT -> {
+
+
+
+                    }
+                    GestureListenerConstants.SWIPE_RIGHT -> {
+
+
+
+                    }
+                }
+            }
+        }
+
+    }
+
+    override fun dispatchTouchEvent(motionEvent: MotionEvent?): Boolean {
+        motionEvent?.let {
+            swipeGestureListener.onTouchEvent(it)
+        }
+
+        return super.dispatchTouchEvent(motionEvent)
     }
 
     override fun userDataToDelete(specificDataKey: String, specificDataPosition: Int) {
