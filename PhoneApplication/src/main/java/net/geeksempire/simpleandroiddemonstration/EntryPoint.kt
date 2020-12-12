@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassUserDataProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroundProcess
@@ -20,6 +21,9 @@ import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformatio
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
 import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
+import net.geekstools.floatshort.PRO.Widgets.RoomDatabase.DatabaseInterface
+import net.geekstools.floatshort.PRO.Widgets.RoomDatabase.DatabaseModel
+import net.geekstools.floatshort.PRO.Widgets.RoomDatabase.DatabaseName
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerInterface
@@ -156,6 +160,23 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         })
 
+
+        /* Database Example */
+
+        //data class
+        val databseModel: DatabaseModel = DatabaseModel(
+            uniqueUsername = "666",
+            emailAddress = "666@gmail.com",
+            phoneNumber = "00666"
+        )
+
+        val widgetDataInterface = Room.databaseBuilder(applicationContext, DatabaseInterface::class.java, DatabaseName)
+            .build()
+
+        widgetDataInterface.initializeDataAccessObject()
+            .insertNewWidgetDataSuspend(databseModel)
+
+        /* Database Example */
     }
 
     override fun onResume() {
