@@ -35,11 +35,14 @@ interface DatabaseDAO {
     @Query("SELECT * FROM WidgetData WHERE emailAddress IN (:emailAddress) AND phoneCountryCode IN (:phoneCountryCode)")
     suspend fun loadWidgetByClassNameProviderWidgetSuspend(emailAddress: String, phoneCountryCode: String): DatabaseModel
 
+
     @Query("UPDATE WidgetData SET emailAddress = :WidgetId WHERE emailAddress = :emailAddress AND phoneCountryCode == :phoneCountryCode")
     suspend fun updateWidgetIdByPackageNameClassNameSuspend(WidgetId: Int, emailAddress: String, phoneCountryCode: String): Int
 
+
     @Query("DELETE FROM WidgetData WHERE emailAddress = :emailAddress AND phoneCountryCode = :phoneCountryCode")
     suspend fun deleteByWidgetClassNameProviderWidgetSuspend(emailAddress: String, phoneCountryCode: String)
+
 
     @Query("SELECT COUNT(uniqueUsername) FROM WidgetData")
     suspend fun getRowCountSuspend(): Int
