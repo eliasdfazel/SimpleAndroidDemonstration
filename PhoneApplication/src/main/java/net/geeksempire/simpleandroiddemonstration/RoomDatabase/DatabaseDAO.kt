@@ -15,24 +15,25 @@ import androidx.room.*
 @Dao
 interface DatabaseDAO {
 
+    //Insert NEW Data
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNewWidgetDataSuspend(vararg arrayOfDatabaseModels: DatabaseModel)
 
-
+    //Update Current Data
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateWidgetDataSuspend(vararg arrayOfDatabaseModels: DatabaseModel)
 
-
     @Delete
     suspend fun deleteSuspend(databaseModel: DatabaseModel)
+
 
 
     @Query("SELECT * FROM WidgetData ORDER BY emailAddress ASC")
     suspend fun getAllWidgetDataSuspend(): List<DatabaseModel>
 
 
-    @Query("SELECT * FROM WidgetData WHERE emailAddress IN (:PackageName) AND phoneCountryCode IN (:ClassNameWidgetProvider)")
-    suspend fun loadWidgetByClassNameProviderWidgetSuspend(PackageName: String, ClassNameWidgetProvider: String): DatabaseModel
+    @Query("SELECT * FROM WidgetData WHERE emailAddress IN (:emailAddress) AND phoneCountryCode IN (:phoneCountryCode)")
+    suspend fun loadWidgetByClassNameProviderWidgetSuspend(emailAddress: String, phoneCountryCode: String): DatabaseModel
 
 
 
