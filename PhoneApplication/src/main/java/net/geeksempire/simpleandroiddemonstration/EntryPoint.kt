@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -184,6 +185,10 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
                     GestureListenerConstants.SWIPE_DOWN -> {
                         println("*** Swipe Down ***")
 
+                        entryPointViewBinding.searchView.requestFocus()
+
+                        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                        inputMethodManager.showSoftInput(entryPointViewBinding.searchView, InputMethodManager.SHOW_IMPLICIT)
 
                     }
                     GestureListenerConstants.SWIPE_UP -> {
