@@ -27,12 +27,20 @@ interface DatabaseDAO {
     suspend fun deleteSuspend(databaseModel: DatabaseModel)
 
 
-    @Query("SELECT * FROM WidgetData ORDER BY AppName ASC")
+    @Query("SELECT * FROM WidgetData ORDER BY emailAddress ASC")
     suspend fun getAllWidgetDataSuspend(): List<DatabaseModel>
 
 
-    @Query("SELECT * FROM WidgetData WHERE PackageName IN (:PackageName) AND ClassNameProvider IN (:ClassNameWidgetProvider)")
+    @Query("SELECT * FROM WidgetData WHERE emailAddress IN (:PackageName) AND phoneCountryCode IN (:ClassNameWidgetProvider)")
     suspend fun loadWidgetByClassNameProviderWidgetSuspend(PackageName: String, ClassNameWidgetProvider: String): DatabaseModel
+
+
+
+
+
+
+
+
 
 
     @Query("UPDATE WidgetData SET WidgetId = :WidgetId WHERE PackageName = :PackageName AND ClassNameProvider == :ClassNameProvider")
