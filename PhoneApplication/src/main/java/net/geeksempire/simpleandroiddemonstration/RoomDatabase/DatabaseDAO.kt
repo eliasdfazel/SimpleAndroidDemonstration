@@ -19,13 +19,14 @@ interface DatabaseDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNewWidgetDataSuspend(vararg arrayOfDatabaseModels: DatabaseModel)
 
+
     //Update Current Data
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateWidgetDataSuspend(vararg arrayOfDatabaseModels: DatabaseModel)
 
+
     @Delete
     suspend fun deleteSuspend(databaseModel: DatabaseModel)
-
 
 
     @Query("SELECT * FROM WidgetData ORDER BY emailAddress ASC")
@@ -36,7 +37,7 @@ interface DatabaseDAO {
     suspend fun loadWidgetByClassNameProviderWidgetSuspend(emailAddress: String, phoneCountryCode: String): DatabaseModel
 
 
-    @Query("UPDATE WidgetData SET emailAddress = :WidgetId WHERE emailAddress = :emailAddress AND phoneCountryCode == :phoneCountryCode")
+    @Query("UPDATE WidgetData SET emailAddress = :WidgetId WHERE emailAddress = :emailAddress AND phoneCountryCode = :phoneCountryCode")
     suspend fun updateWidgetIdByPackageNameClassNameSuspend(WidgetId: Int, emailAddress: String, phoneCountryCode: String): Int
 
 

@@ -43,7 +43,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
     //Gesture Configuration
     private val swipeGestureListener: SwipeGestureListener by lazy {
-        SwipeGestureListener(applicationContext, this@EntryPoint)
+        SwipeGestureListener(applicationContext,this@EntryPoint)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
