@@ -1,6 +1,5 @@
 package net.geeksempire.simpleandroiddemonstration
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,10 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassUserDataProcess
+import kotlinx.coroutines.*
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroundProcess
+import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
-import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 import net.geekstools.floatshort.PRO.Widgets.RoomDatabase.DatabaseInterface
 import net.geekstools.floatshort.PRO.Widgets.RoomDatabase.DatabaseModel
@@ -72,9 +72,6 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
             it.value
         }
 
-
-
-
         setupColorsOfViews()
 
         allUsersAdapter = AllUsersAdapter(applicationContext, this@EntryPoint)
@@ -85,7 +82,33 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         entryPointViewBinding.addNewUser.setOnClickListener {
 
-            startActivity(Intent(applicationContext, AddNewUser::class.java))
+//            startActivity(Intent(applicationContext, AddNewUser::class.java))
+
+            /* Database Example */
+            val databaseModel: DatabaseModel = DatabaseModel(
+                    uniqueUsername = "666",
+                    emailAddress = "666@gmail.com",
+                    phoneNumber = "00666"
+            )
+
+            val widgetDataInterface = Room.databaseBuilder(applicationContext, DatabaseInterface::class.java, DatabaseName)
+                    .build()
+
+            CoroutineScope(Dispatchers.IO).launch {
+
+                val dao = widgetDataInterface.initializeDataAccessObject()
+
+                dao.insertNewWidgetDataSuspend(databaseModel)
+
+
+                dao.getAllWidgetDataSuspend().forEach { databaseModel ->
+
+                    println(">>>>>>>>>>>>>>>>>> ${databaseModel}")
+
+                }
+
+            }
+            /* Database Example */
 
         }
 
@@ -161,20 +184,33 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
         })
 
 
-        /* Database Example */
-        val databaseModel: DatabaseModel = DatabaseModel(
-            uniqueUsername = "666",
-            emailAddress = "666@gmail.com",
-            phoneNumber = "00666"
-        )
+        //Background Process
+        val coroutinesProcess = CoroutinesProcess()
 
-        val widgetDataInterface = Room.databaseBuilder(applicationContext, DatabaseInterface::class.java, DatabaseName)
-            .build()
 
-        widgetDataInterface.initializeDataAccessObject()
-            .insertNewWidgetDataSuspend(databaseModel)
+        //Using Coroutine Launch
+        coroutinesProcess.testFunctionsLaunch()
 
-        /* Database Example */
+
+        //Using Coroutine Asyc
+        coroutinesProcess.testFunctionsAsync()
+
+        //Using Coroutine Asyc
+        CoroutineScope(Dispatchers.IO).launch {
+
+            //
+
+            val result = coroutinesProcess.testFunctionsAsyncReturnResult().await()
+
+            //Use Result On UI
+            withContext(Dispatchers.Main) {
+
+                //Use Result Here For UI
+
+            }
+
+        }
+
     }
 
     override fun onResume() {

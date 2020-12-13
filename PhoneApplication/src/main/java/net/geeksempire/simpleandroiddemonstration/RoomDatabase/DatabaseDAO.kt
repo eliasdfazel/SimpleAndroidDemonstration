@@ -15,9 +15,14 @@ import androidx.room.*
 @Dao
 interface DatabaseDAO {
 
-    //Insert NEW Data
+    //Use It Inside Coroutines
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNewWidgetDataSuspend(vararg arrayOfDatabaseModels: DatabaseModel)
+
+
+    //Use It Inside Thread
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun insertNewWidgetDataSuspend(vararg arrayOfDatabaseModels: DatabaseModel)
 
 
     //Update Current Data
