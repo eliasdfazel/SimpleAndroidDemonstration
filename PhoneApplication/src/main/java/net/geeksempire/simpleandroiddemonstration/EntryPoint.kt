@@ -1,9 +1,13 @@
 package net.geeksempire.simpleandroiddemonstration
 
+import android.app.ActivityOptions
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -26,6 +30,7 @@ import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroun
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
+import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 import net.geeksempire.simpleandroiddemonstration.databinding.IconsShapesPreferencesBinding
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
@@ -87,14 +92,12 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         entryPointViewBinding.addNewUser.setOnClickListener {
 
-            openCustomDialogue(this@EntryPoint)
-
-            /*Handler(Looper.getMainLooper()).postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
 
                 startActivity(Intent(applicationContext, AddNewUser::class.java),
                         ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, 0).toBundle())
 
-            }, 500)*/
+            }, 500)
 
             /* Database Example */
             /*val databaseModel: DatabaseModel = DatabaseModel(
