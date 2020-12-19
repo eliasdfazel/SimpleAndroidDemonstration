@@ -1,6 +1,8 @@
 package net.geeksempire.simpleandroiddemonstration
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -50,6 +52,12 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
         super.onCreate(savedInstanceState)
         entryPointViewBinding = EntryPointViewBinding.inflate(layoutInflater)
         setContentView(entryPointViewBinding.root)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            //Execute Codes With Delay
+
+        }, 1000)
 
 
         /*HashMap Samples*/

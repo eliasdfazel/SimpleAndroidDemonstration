@@ -10,12 +10,13 @@ class CoroutinesProcess {
 
     }
 
-    fun testFunctionsLaunch() = CoroutineScope(Dispatchers.IO).launch {
+    fun testFunctionsLaunch(): Job = CoroutineScope(Dispatchers.IO).launch {
 
         //When You Want To Mix Some Results
 
         //testFunctionsLaunch is now supervisor of testFunctionsAsync
         testFunctionsAsync()
+
 
     }
 
