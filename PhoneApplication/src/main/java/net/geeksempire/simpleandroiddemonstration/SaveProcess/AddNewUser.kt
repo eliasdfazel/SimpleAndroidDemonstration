@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
+import net.geeksempire.simpleandroiddemonstration.R
 import net.geeksempire.simpleandroiddemonstration.databinding.AddNewUserViewBinding
 
 class AddNewUser : AppCompatActivity() {
@@ -49,6 +50,13 @@ class AddNewUser : AppCompatActivity() {
 
             false
         }
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        overridePendingTransition(0, R.anim.slide_to_right)
 
     }
 

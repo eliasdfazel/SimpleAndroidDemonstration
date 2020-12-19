@@ -1,5 +1,7 @@
 package net.geeksempire.simpleandroiddemonstration
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,7 +16,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassUserDataProcess
 import kotlinx.coroutines.*
@@ -22,10 +23,8 @@ import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroun
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
+import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
-import net.geekstools.floatshort.PRO.Widgets.RoomDatabase.DatabaseInterface
-import net.geekstools.floatshort.PRO.Widgets.RoomDatabase.DatabaseModel
-import net.geekstools.floatshort.PRO.Widgets.RoomDatabase.DatabaseName
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerInterface
@@ -53,11 +52,6 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
         entryPointViewBinding = EntryPointViewBinding.inflate(layoutInflater)
         setContentView(entryPointViewBinding.root)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-
-            //Execute Codes With Delay
-
-        }, 1000)
 
 
         /*HashMap Samples*/
@@ -90,10 +84,16 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         entryPointViewBinding.addNewUser.setOnClickListener {
 
-//            startActivity(Intent(applicationContext, AddNewUser::class.java))
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                startActivity(Intent(applicationContext, AddNewUser::class.java),
+                        ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, 0).toBundle())
+
+            }, 500)
+
 
             /* Database Example */
-            val databaseModel: DatabaseModel = DatabaseModel(
+            /*val databaseModel: DatabaseModel = DatabaseModel(
                     uniqueUsername = "666",
                     emailAddress = "666@gmail.com",
                     phoneNumber = "00666"
@@ -115,7 +115,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
                 }
 
-            }
+            }*/
             /* Database Example */
 
         }
