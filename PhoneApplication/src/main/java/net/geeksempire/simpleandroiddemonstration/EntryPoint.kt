@@ -1,18 +1,21 @@
 package net.geeksempire.simpleandroiddemonstration
 
-import android.app.ActivityOptions
-import android.content.Intent
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,8 +26,8 @@ import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroun
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
-import net.geeksempire.simpleandroiddemonstration.SaveProcess.AddNewUser
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
+import net.geeksempire.simpleandroiddemonstration.databinding.IconsShapesPreferencesBinding
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerInterface
@@ -84,13 +87,14 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         entryPointViewBinding.addNewUser.setOnClickListener {
 
-            Handler(Looper.getMainLooper()).postDelayed({
+            openCustomDialogue(this@EntryPoint)
+
+            /*Handler(Looper.getMainLooper()).postDelayed({
 
                 startActivity(Intent(applicationContext, AddNewUser::class.java),
                         ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, 0).toBundle())
 
-            }, 500)
-
+            }, 500)*/
 
             /* Database Example */
             /*val databaseModel: DatabaseModel = DatabaseModel(
@@ -320,5 +324,54 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
         }
 
     }
+
+    fun openCustomDialogue(activity: AppCompatActivity) {
+
+        val dialogueWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                377f,
+                activity.resources.displayMetrics).toInt()
+
+        val dialogueHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                387f,
+                activity.resources.displayMetrics).toInt()
+
+        //Custom Dialogue Configurations
+        val layoutParams = WindowManager.LayoutParams()
+
+        layoutParams.width = dialogueWidth
+        layoutParams.height = dialogueHeight
+        layoutParams.windowAnimations = android.R.style.Animation_Dialog
+        layoutParams.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND
+        layoutParams.dimAmount = 0.57f
+
+        val iconsShapesPreferencesBinding = IconsShapesPreferencesBinding.inflate(layoutInflater)
+
+        val dialog = Dialog(activity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(iconsShapesPreferencesBinding.root)
+        dialog.window!!.attributes = layoutParams
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.decorView.setBackgroundColor(Color.TRANSPARENT)
+        dialog.setCancelable(true)
+        //Custom Dialogue Configurations
+
+        iconsShapesPreferencesBinding.dialogueTitle.text = "Sun Software"
+
+        iconsShapesPreferencesBinding.dialogueTitle.setOnClickListener {
+
+            Toast.makeText(applicationContext, "Sun Software 👍", Toast.LENGTH_LONG).show()
+
+            dialog.dismiss()
+        }
+
+
+        dialog.setOnDismissListener {
+
+            dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        }
+
+        dialog.show()
+    }
+
 
 }
