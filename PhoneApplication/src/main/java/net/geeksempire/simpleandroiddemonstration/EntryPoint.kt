@@ -1,8 +1,7 @@
 package net.geeksempire.simpleandroiddemonstration
 
-import android.app.ActivityOptions
+import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -28,7 +27,6 @@ import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroun
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
-import net.geeksempire.simpleandroiddemonstration.WebView.InternalWebView
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 import net.geeksempire.simpleandroiddemonstration.databinding.IconsShapesPreferencesBinding
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
@@ -89,9 +87,6 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
         entryPointViewBinding.recyclerView.adapter = allUsersAdapter
 
         entryPointViewBinding.addNewUser.setOnClickListener {
-
-            startActivity(Intent(applicationContext, InternalWebView::class.java),
-                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, 0).toBundle())
 
             /*Handler(Looper.getMainLooper()).postDelayed({
 
@@ -229,6 +224,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onResume() {
         super.onResume()
 
@@ -236,6 +232,35 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
             userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
 
+        }
+
+
+        entryPointViewBinding.addNewUser.setOnTouchListener { view, motionEvent ->
+            println(">>> Touch")
+
+            val initialX = motionEvent.x
+
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    println(">>> Down")
+
+
+                }
+                MotionEvent.ACTION_UP -> {
+                    println(">>> Up")
+
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    println(">>> Move")
+
+                    entryPointViewBinding.addNewUser.y = motionEvent.y
+
+                    entryPointViewBinding.addNewUser.x = motionEvent.x
+
+                }
+            }
+
+            true
         }
 
     }
