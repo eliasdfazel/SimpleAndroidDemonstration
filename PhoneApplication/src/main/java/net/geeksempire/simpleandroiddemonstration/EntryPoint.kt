@@ -239,6 +239,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
             println(">>> Touch")
 
             val initialX = motionEvent.x
+            val initialY = motionEvent.y
 
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
