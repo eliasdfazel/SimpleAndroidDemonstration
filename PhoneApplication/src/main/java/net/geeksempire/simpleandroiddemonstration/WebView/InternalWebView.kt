@@ -17,7 +17,7 @@ class InternalWebView : AppCompatActivity() {
         internalWebViewBinding = InternalWebViewBinding.inflate(layoutInflater)
         setContentView(internalWebViewBinding.root)
 
-        val linkToLoad = "https://google.com"
+        val linkToLoad = "https://GeeksEmpire.net"
 
         internalWebViewBinding.internalBrowser.settings.javaScriptEnabled = true
 
@@ -31,7 +31,8 @@ class InternalWebView : AppCompatActivity() {
 
         internalWebViewBinding.internalBrowser.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
         internalWebViewBinding.internalBrowser.settings.setAppCacheEnabled(true)
-        internalWebViewBinding.internalBrowser.settings.setAppCachePath(getFileStreamPath("").path + "${File.separator}cache${File.separator}")
+        internalWebViewBinding.internalBrowser.settings.setAppCachePath(getFileStreamPath("").path
+                + "${File.separator}cache${File.separator}")
 
         internalWebViewBinding.internalBrowser.webViewClient = BuiltInWebViewClient()
         internalWebViewBinding.internalBrowser.webChromeClient = BuiltInChromeWebViewClient()
