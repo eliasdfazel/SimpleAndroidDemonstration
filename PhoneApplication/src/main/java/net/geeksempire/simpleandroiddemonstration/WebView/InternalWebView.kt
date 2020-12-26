@@ -36,7 +36,9 @@ class InternalWebView : AppCompatActivity() {
         internalWebViewBinding.internalBrowser.webViewClient = BuiltInWebViewClient()
         internalWebViewBinding.internalBrowser.webChromeClient = BuiltInChromeWebViewClient()
 
-        internalWebViewBinding.internalBrowser.addJavascriptInterface(WebInterface(this@InternalWebView), "Android")
+        internalWebViewBinding.internalBrowser.addJavascriptInterface(
+            WebInterface(this@InternalWebView),
+            "Android")/* This Label Is Use To Connect With Codes In Javascript */
 
         internalWebViewBinding.internalBrowser.loadUrl(linkToLoad)
 
