@@ -254,7 +254,6 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
                     println(">>> Move")
 
                     entryPointViewBinding.addNewUser.y = motionEvent.y
-
                     entryPointViewBinding.addNewUser.x = motionEvent.x
 
                 }
