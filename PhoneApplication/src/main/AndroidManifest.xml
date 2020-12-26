@@ -25,6 +25,8 @@
 
         <activity android:name=".WebView.InternalWebView" />
 
+        <activity android:name=".WorkManager.WorkManagerActivity" />
+
     </application>
 
 </manifest>
