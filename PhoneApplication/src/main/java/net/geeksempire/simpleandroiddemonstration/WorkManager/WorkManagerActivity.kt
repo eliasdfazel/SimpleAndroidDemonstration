@@ -20,18 +20,23 @@ class WorkManagerActivity : AppCompatActivity() {
         workManagerViewBinding = WorkManagerViewBinding.inflate(layoutInflater)
         setContentView(workManagerViewBinding.root)
 
-        val workRequest = OneTimeWorkRequestBuilder<WorkBackgroundProcess>().build()
+        val workRequestFirst = OneTimeWorkRequestBuilder<WorkBackgroundProcess>().build()
+        val workRequestSecond = OneTimeWorkRequestBuilder<WorkBackgroundProcess>().build()
+        val workRequestThird = OneTimeWorkRequestBuilder<WorkBackgroundProcess>().build()
         //PeriodicWorkRequestBuilder<WorkBackgroundProcess>(1, TimeUnit.HOURS).build()
         //OneTimeWorkRequestBuilder<WorkBackgroundProcess>().build()
 
         val workManager = WorkManager.getInstance(applicationContext)
-//        workManager.beginWith(listOf(workRequest))
-//        workManager.then(workRequest)
-//        workManager.enqueue()
-        workManager.enqueue(workRequest)
 
         workManager
-                .getWorkInfoByIdLiveData(workRequest.id).observe(this@WorkManagerActivity, Observer { workerResult ->
+                .beginWith(listOf(workRequestFirst, workRequestSecond))
+                .then(workRequestThird)
+                .enqueue()
+
+//        workManager.enqueue(workRequest)
+
+        workManager
+                .getWorkInfoByIdLiveData(workRequestFirst.id).observe(this@WorkManagerActivity, Observer { workerResult ->
 
                     if (workerResult != null
                             && workerResult.state == WorkInfo.State.SUCCEEDED) {
