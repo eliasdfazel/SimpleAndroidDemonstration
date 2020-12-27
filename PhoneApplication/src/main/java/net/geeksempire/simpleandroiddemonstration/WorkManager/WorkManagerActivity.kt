@@ -1,13 +1,14 @@
 package net.geeksempire.simpleandroiddemonstration.WorkManager
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.*
+import com.bumptech.glide.Glide
 import net.geeksempire.simpleandroiddemonstration.ViewModel.GalleryLiveData
 import net.geeksempire.simpleandroiddemonstration.databinding.WorkManagerViewBinding
+import java.io.File
 import java.util.*
 
 class WorkManagerActivity : AppCompatActivity() {
@@ -39,7 +40,13 @@ class WorkManagerActivity : AppCompatActivity() {
 
                             val imageFilePath = String(byteArray)
 
-                            workManagerViewBinding.imageView.setImageBitmap(BitmapFactory.decodeFile(imageFilePath))
+                            val imageFile = File(imageFilePath)
+
+                            Glide.with(applicationContext)
+                                    .load(imageFile)
+                                    .into(workManagerViewBinding.imageView)
+
+//                            workManagerViewBinding.imageView.setImageBitmap(BitmapFactory.decodeFile(imageFilePath))
 
                         }
 
