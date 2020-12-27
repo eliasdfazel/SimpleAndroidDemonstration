@@ -8,10 +8,9 @@ import kotlinx.coroutines.delay
 import java.net.URL
 import java.nio.charset.Charset
 
-
 class WorkBackgroundProcess(appContext: Context, workerParams: WorkerParameters) : CoroutineWorker(appContext, workerParams) {
 
-    var processResult = false
+    var workerResult: Result = Result.failure()
 
     override suspend fun doWork() : Result {
 
@@ -19,21 +18,26 @@ class WorkBackgroundProcess(appContext: Context, workerParams: WorkerParameters)
 
         delay(1000)
 
-        val imageFile = applicationContext.getFileStreamPath("Image.PNG")
-        if (!imageFile.exists()) {
-            imageFile.mkdir()
-        }
-        imageFile.writeBytes(imageData)
+        val imageFile = applicationContext.getFileStreamPath("ImageOne.PNG")
 
-        val workOutputData = workDataOf("KEY_IMAGE_FILE_NAME_PATH" to imageFile.absolutePath.toByteArray(Charset.defaultCharset()))
+        applicationContext.openFileOutput("ImageOne.PNG", Context.MODE_PRIVATE)
+            .write(imageData)
 
-        val workerResult: Result = Result.success(workOutputData)
+        val workOutputData = workDataOf(
+                "KEY_IMAGE_FILE_NAME_PATH" to imageFile.absolutePath.toByteArray(Charset.defaultCharset())
+        )
 
-        return if (processResult) {
-            Result.failure()
+        workerResult = if (imageFile.exists()) {
+
+            Result.success(workOutputData)
+
         } else {
-            workerResult
+
+            Result.failure()
+
         }
+
+        return workerResult
     }
 
 }
