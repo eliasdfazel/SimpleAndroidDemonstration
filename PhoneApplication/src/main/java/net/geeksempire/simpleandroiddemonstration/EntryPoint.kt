@@ -59,8 +59,6 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
         entryPointViewBinding = EntryPointViewBinding.inflate(layoutInflater)
         setContentView(entryPointViewBinding.root)
 
-
-
         /*HashMap Samples*/
         hashMap.put("A-Text-Key"/*Key*/, "Test"/*Value*/)
 
