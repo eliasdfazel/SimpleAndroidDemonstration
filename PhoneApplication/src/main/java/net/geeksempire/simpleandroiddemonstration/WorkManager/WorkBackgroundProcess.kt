@@ -1,6 +1,7 @@
 package net.geeksempire.simpleandroiddemonstration.WorkManager
 
 import android.content.Context
+import android.os.StrictMode
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
@@ -14,17 +15,20 @@ class WorkBackgroundProcess(appContext: Context, workerParams: WorkerParameters)
 
     override suspend fun doWork() : Result {
 
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+
         val httpsRequests = HttpsRequests(applicationContext)
         val imageData = httpsRequests.downloadFileFromServer(
-                "https://media.wired.com/photos/5c5354d391d0df22c1dee493/master/w_2560%2Cc_limit/Backchannel-Lena-Final.jpg"
-        ).await().toByteArray()
+                "https://play-lh.googleusercontent.com/0bUs4rGK3EwUiPiX6bm2CsOMJuq89RZbGtY0igaWxacXpqmyXy8wWJeYeUMJHG-JgQ=s180"
+        )
 
         delay(1000)
 
         val imageFile = applicationContext.getFileStreamPath("ImageOne.PNG")
 
         applicationContext.openFileOutput("ImageOne.PNG", Context.MODE_PRIVATE)
-            .write(imageData)
+            .write(imageData.contentByteArray)
 
         val workOutputData = workDataOf(
                 "KEY_IMAGE_FILE_NAME_PATH" to imageFile.absolutePath.toByteArray(Charset.defaultCharset())

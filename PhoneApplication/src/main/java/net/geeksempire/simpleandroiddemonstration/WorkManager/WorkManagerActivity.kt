@@ -13,6 +13,7 @@ import net.geeksempire.simpleandroiddemonstration.databinding.WorkManagerViewBin
 import java.io.File
 import java.util.*
 
+
 class WorkManagerActivity : AppCompatActivity() {
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
@@ -83,7 +84,6 @@ class WorkManagerActivity : AppCompatActivity() {
 
             it.forEach { aData ->
                 Log.d(this@WorkManagerActivity.javaClass.simpleName, "${aData}")
-
 
 
             }

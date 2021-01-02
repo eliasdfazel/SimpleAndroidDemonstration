@@ -1,22 +1,18 @@
 package net.geeksempire.simpleandroiddemonstration.Network
 
 import android.content.Context
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import java.io.BufferedReader
 import java.io.DataOutputStream
-import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
+
+data class DownloadedFileInformation(var contentByteArray: ByteArray, var contentType: String, var contentSize: Int)
 
 class HttpsRequests (val context: Context) {
 
     //Https.GET
     //Https.POST
 
-    fun downloadFileFromServer(linkToDownload: String) : Deferred<String> = CoroutineScope(Dispatchers.IO).async {
+    fun downloadFileFromServer(linkToDownload: String) : DownloadedFileInformation {
 
         val url = URL(linkToDownload)
 
@@ -25,26 +21,26 @@ class HttpsRequests (val context: Context) {
 
         httpsConnection.doOutput = true
 
+        httpsConnection.connect()
+
         val dataOutputStream = DataOutputStream(httpsConnection.outputStream)
+
+        val contentLength = httpsConnection.contentLength
+        println("Content Length -> ${httpsConnection.contentLength}")
+
+        val contentType = httpsConnection.contentType
+        println("Content Type -> ${httpsConnection.contentType}")
+
+        val inputStream = httpsConnection.inputStream
+
+        val byteArray = inputStream.readBytes()
 
         dataOutputStream.flush()
         dataOutputStream.close()
 
-        val bufferReader = BufferedReader(InputStreamReader(httpsConnection.inputStream))
+        inputStream.close()
 
-        var inputLine: String?
-
-        val response = StringBuffer()
-
-        while (bufferReader.readLine().also { inputLine = it } != null) {
-
-            response.append(inputLine)
-
-        }
-
-        bufferReader.close()
-
-        return@async response.toString()
+        return DownloadedFileInformation(byteArray, contentType, contentLength)
 
     }
 
