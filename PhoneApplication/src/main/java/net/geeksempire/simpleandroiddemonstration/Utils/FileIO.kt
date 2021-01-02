@@ -87,6 +87,27 @@ class FileIO (val context: Context){
 
     }
 
+    fun renameFile(oldFileName: String, newFileName: String) {
+
+        val oldFile: File? = context.getFileStreamPath(oldFileName)
+        val newFile: File? = context.getFileStreamPath(newFileName)
+
+        if (oldFile != null) {
+            if (oldFile.exists()) {
+
+                val content = oldFile.readText()
+
+                newFile!!.writeText(content)
+
+                oldFile.delete()
+
+            }
+        }
+
+        //oldFile!!.renameTo(newFile)
+
+    }
+
     fun saveFileAppendLine(fileName: String, content: String) {
 
         val fileOutputStream = context.openFileOutput(fileName, Context.MODE_APPEND)
@@ -113,7 +134,9 @@ class FileIO (val context: Context){
         }
 
         context.deleteFile(fileName)
-        context.getFileStreamPath(temporaryFileName).renameTo(context.getFileStreamPath(fileName))
+
+        context.getFileStreamPath(temporaryFileName)
+                .renameTo(context.getFileStreamPath(fileName))
 
     }
 
