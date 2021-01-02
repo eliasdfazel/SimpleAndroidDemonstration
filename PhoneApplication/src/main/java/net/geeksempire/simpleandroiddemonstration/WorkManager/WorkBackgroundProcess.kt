@@ -14,8 +14,6 @@ class WorkBackgroundProcess(appContext: Context, workerParams: WorkerParameters)
 
     override suspend fun doWork() : Result {
 
-//        val imageData = URL("https://media.wired.com/photos/5c5354d391d0df22c1dee493/master/w_2560%2Cc_limit/Backchannel-Lena-Final.jpg").readBytes()
-
         val httpsRequests = HttpsRequests(applicationContext)
         val imageData = httpsRequests.downloadFileFromServer(
                 "https://media.wired.com/photos/5c5354d391d0df22c1dee493/master/w_2560%2Cc_limit/Backchannel-Lena-Final.jpg"

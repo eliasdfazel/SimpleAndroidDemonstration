@@ -13,8 +13,6 @@ import javax.net.ssl.HttpsURLConnection
 
 class HttpsRequests (val context: Context) {
 
-    val networkCheckpoint = NetworkCheckpoint(context)
-
     //Https.GET
     //Https.POST
 
@@ -25,7 +23,7 @@ class HttpsRequests (val context: Context) {
         val httpsConnection = url.openConnection() as HttpsURLConnection
         httpsConnection.requestMethod = "GET"
 
-        httpsConnection.setDoOutput(true)
+        httpsConnection.doOutput = true
 
         val dataOutputStream = DataOutputStream(httpsConnection.outputStream)
 
