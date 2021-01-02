@@ -5,7 +5,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import kotlinx.coroutines.delay
-import java.net.URL
+import net.geeksempire.simpleandroiddemonstration.Network.HttpsRequests
 import java.nio.charset.Charset
 
 class WorkBackgroundProcess(appContext: Context, workerParams: WorkerParameters) : CoroutineWorker(appContext, workerParams) {
@@ -14,7 +14,12 @@ class WorkBackgroundProcess(appContext: Context, workerParams: WorkerParameters)
 
     override suspend fun doWork() : Result {
 
-        val imageData = URL("https://media.wired.com/photos/5c5354d391d0df22c1dee493/master/w_2560%2Cc_limit/Backchannel-Lena-Final.jpg").readBytes()
+//        val imageData = URL("https://media.wired.com/photos/5c5354d391d0df22c1dee493/master/w_2560%2Cc_limit/Backchannel-Lena-Final.jpg").readBytes()
+
+        val httpsRequests = HttpsRequests(applicationContext)
+        val imageData = httpsRequests.downloadFileFromServer(
+                "https://media.wired.com/photos/5c5354d391d0df22c1dee493/master/w_2560%2Cc_limit/Backchannel-Lena-Final.jpg"
+        ).await().toByteArray()
 
         delay(1000)
 
