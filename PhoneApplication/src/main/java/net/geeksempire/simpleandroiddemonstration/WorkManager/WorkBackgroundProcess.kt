@@ -25,9 +25,9 @@ class WorkBackgroundProcess(appContext: Context, workerParams: WorkerParameters)
 
         delay(1000)
 
-        val imageFile = applicationContext.getFileStreamPath("ImageOne.PNG")
+        val imageFile = applicationContext.getFileStreamPath("ImageOne${imageData.contentType}")
 
-        applicationContext.openFileOutput("ImageOne.PNG", Context.MODE_PRIVATE)
+        applicationContext.openFileOutput("ImageOne${imageData.contentType}", Context.MODE_PRIVATE)
             .write(imageData.contentByteArray)
 
         val workOutputData = workDataOf(

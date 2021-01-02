@@ -40,7 +40,32 @@ class HttpsRequests (val context: Context) {
 
         inputStream.close()
 
-        return DownloadedFileInformation(byteArray, contentType, contentLength)
+        return DownloadedFileInformation(byteArray, getContentType(contentType), contentLength)
+
+    }
+
+    fun getContentType(httpsContentType: String) : String {
+
+        return when (httpsContentType) {
+            "image/jpeg", "image/png", "image/gif" -> {
+
+                "." + httpsContentType.replace("image/", "")
+
+            }
+            "audio/mpeg" -> {
+
+                "." + "mp3"
+
+            }
+            "video/mpeg" -> {
+
+                "." + "mp4"
+
+            }
+            else -> {
+                ""
+            }
+        }
 
     }
 
