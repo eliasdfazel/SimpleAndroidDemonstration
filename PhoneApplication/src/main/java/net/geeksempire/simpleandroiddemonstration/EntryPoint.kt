@@ -1,7 +1,6 @@
 package net.geeksempire.simpleandroiddemonstration
 
 import android.annotation.SuppressLint
-import android.app.ActivityOptions
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -29,7 +28,7 @@ import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroun
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
-import net.geeksempire.simpleandroiddemonstration.WorkManager.WorkManagerActivity
+import net.geeksempire.simpleandroiddemonstration.Services.PlayWithServicesActivity
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 import net.geeksempire.simpleandroiddemonstration.databinding.IconsShapesPreferencesBinding
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
@@ -89,8 +88,10 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         entryPointViewBinding.addNewUser.setOnClickListener {
 
-            startActivity(Intent(applicationContext, WorkManagerActivity::class.java),
-                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, 0).toBundle())
+            startActivity(Intent(applicationContext, PlayWithServicesActivity::class.java))
+
+            /*startActivity(Intent(applicationContext, WorkManagerActivity::class.java),
+                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, 0).toBundle())*/
 
             /*Handler(Looper.getMainLooper()).postDelayed({
 

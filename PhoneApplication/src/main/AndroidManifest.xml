@@ -44,6 +44,9 @@
         </activity>
 
         <activity android:name=".WorkManager.WorkManagerActivity" />
+        <activity android:name=".Services.PlayWithServicesActivity" />
+
+        <service android:name=".Services.LoadingServices"/>
 
     </application>
 
