@@ -54,11 +54,13 @@ class LoadingServices : Service() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         val notificationBuilder = NotificationCompat.Builder(applicationContext, this@LoadingServices.javaClass.simpleName)
+//        notificationBuilder.setContent(VIEW)
         notificationBuilder.setContentTitle("A Title")
         notificationBuilder.setContentText("Test Text")
         notificationBuilder.setTicker("📱📱📱📱📱📱📱📱📱📱")
         notificationBuilder.setSmallIcon(android.R.drawable.arrow_down_float)
-        notificationBuilder.color = Color.CYAN
+        notificationBuilder.color = Color.GREEN
+//        notificationBuilder.setOngoing(true)
 
         val intent = Intent(applicationContext, InternalWebView::class.java).apply {
             putExtra(Intent.EXTRA_TEXT, "https://gsmarena.com")
