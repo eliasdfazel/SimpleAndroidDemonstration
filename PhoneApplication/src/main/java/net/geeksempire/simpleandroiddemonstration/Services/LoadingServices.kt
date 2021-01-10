@@ -65,14 +65,15 @@ class LoadingServices : Service() {
 
     }
 
-    fun createNotification() : Notification {
+    private fun createNotification() : Notification {
 
-        val remoteNotificationLayout = RemoteViews(getPackageName(), R.layout.play_with_services_layout)
+        //RemoteView Support Linear and Relative Layout
+        val remoteNotificationLayout = RemoteViews(packageName, R.layout.notification_layout)
 
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         val notificationBuilder = NotificationCompat.Builder(applicationContext, this@LoadingServices.javaClass.simpleName)
-//        notificationBuilder.setContent(remoteNotificationLayout)
+        notificationBuilder.setContent(remoteNotificationLayout)
         notificationBuilder.setContentTitle("A Title")
         notificationBuilder.setContentText("Test Text")
         notificationBuilder.setTicker("📱📱📱📱📱📱📱📱📱📱")
