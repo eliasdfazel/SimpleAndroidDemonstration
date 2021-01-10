@@ -19,6 +19,10 @@ class HttpsRequests (val context: Context) {
         val httpsConnection = url.openConnection() as HttpsURLConnection
         httpsConnection.requestMethod = "GET"
 
+//        httpsConnection.setRequestProperty("Password", "ValuePassword")
+        httpsConnection.setRequestProperty("User-Agent", "firefox")
+        //setRequestProperty("Content-Type", "application/json");
+
         httpsConnection.doOutput = true
 
         httpsConnection.connect()

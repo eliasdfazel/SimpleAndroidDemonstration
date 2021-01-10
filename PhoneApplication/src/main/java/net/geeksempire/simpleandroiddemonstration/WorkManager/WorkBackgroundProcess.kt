@@ -19,6 +19,7 @@ class WorkBackgroundProcess(appContext: Context, workerParams: WorkerParameters)
         StrictMode.setThreadPolicy(policy)
 
         val httpsRequests = HttpsRequests(applicationContext)
+
         val imageData = httpsRequests.downloadFileFromServer(
                 "https://play-lh.googleusercontent.com/0bUs4rGK3EwUiPiX6bm2CsOMJuq89RZbGtY0igaWxacXpqmyXy8wWJeYeUMJHG-JgQ=s180"
         )
