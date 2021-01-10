@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import net.geeksempire.simpleandroiddemonstration.R
 import net.geeksempire.simpleandroiddemonstration.WebView.InternalWebView
@@ -24,9 +25,24 @@ class LoadingServices : Service() {
             startForeground(123,
                     createNotification())
 
-            val linkToDownload = intent.getStringExtra("LinkToDownload")
+            if (intent.getStringExtra("LinkToDownload") == "BOOKOOSH") {
 
+                stopSelf()
 
+            } else {
+
+                val linkToDownload = intent.getStringExtra("LinkToDownload")
+
+                //Start Downloading
+                //Download Process Completed
+
+                //Send Broadcast Of Result with Extra Data
+                applicationContext.sendBroadcast(Intent().apply {
+                    putExtra("Result", "Success")
+                    action = "DataFromService"
+                })
+
+            }
 
         }
 
@@ -51,16 +67,17 @@ class LoadingServices : Service() {
 
     fun createNotification() : Notification {
 
+        val remoteNotificationLayout = RemoteViews(getPackageName(), R.layout.play_with_services_layout)
+
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         val notificationBuilder = NotificationCompat.Builder(applicationContext, this@LoadingServices.javaClass.simpleName)
-//        notificationBuilder.setContent(VIEW)
+//        notificationBuilder.setContent(remoteNotificationLayout)
         notificationBuilder.setContentTitle("A Title")
         notificationBuilder.setContentText("Test Text")
         notificationBuilder.setTicker("📱📱📱📱📱📱📱📱📱📱")
         notificationBuilder.setSmallIcon(android.R.drawable.arrow_down_float)
         notificationBuilder.color = Color.GREEN
-//        notificationBuilder.setOngoing(true)
 
         val intent = Intent(applicationContext, InternalWebView::class.java).apply {
             putExtra(Intent.EXTRA_TEXT, "https://gsmarena.com")
@@ -69,6 +86,14 @@ class LoadingServices : Service() {
         val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         notificationBuilder.setContentIntent(pendingIntent)
+
+        val cancelStable = Intent(applicationContext, LoadingServices::class.java).apply {
+            putExtra("LinkToDownload", "BOOKOOSH")
+        }
+
+        val cancelPending = PendingIntent.getService(applicationContext, 0, cancelStable, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        remoteNotificationLayout.setOnClickPendingIntent(R.id.cancelService, cancelPending)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
