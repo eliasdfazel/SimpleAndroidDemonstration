@@ -1,5 +1,6 @@
 package net.geeksempire.simpleandroiddemonstration.WebView
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.webkit.*
@@ -17,7 +18,15 @@ class InternalWebView : AppCompatActivity() {
         internalWebViewBinding = InternalWebViewBinding.inflate(layoutInflater)
         setContentView(internalWebViewBinding.root)
 
-        val linkToLoad = "https://GeeksEmpire.net"
+        val linkToLoad = if (intent.hasExtra(Intent.EXTRA_TEXT)) {
+
+            intent.getStringExtra(Intent.EXTRA_TEXT)
+
+        } else {
+
+            "https://GeeksEmpire.net"
+
+        }
 
         internalWebViewBinding.internalBrowser.settings.javaScriptEnabled = true
 
@@ -41,7 +50,7 @@ class InternalWebView : AppCompatActivity() {
             WebInterface(this@InternalWebView),
             "Android")/* This Label Is Use To Connect With Codes In Javascript */
 
-        internalWebViewBinding.internalBrowser.loadUrl(linkToLoad)
+        internalWebViewBinding.internalBrowser.loadUrl(linkToLoad?:"https://GeeksEmpire.net")
 
     }
 
