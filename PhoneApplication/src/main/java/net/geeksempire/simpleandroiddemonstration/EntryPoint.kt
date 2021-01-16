@@ -89,6 +89,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         entryPointViewBinding.addNewUser.setOnClickListener {
 
+            //This is REST API
             //https://abanabsalan.com/wp-json/wp/v2/posts/4749
 
             //For Example Id Of Product -> 4749
