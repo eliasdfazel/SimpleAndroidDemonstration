@@ -11,6 +11,7 @@ import net.geeksempire.simpleandroiddemonstration.Network.NetworkCheckpoint
 import net.geeksempire.simpleandroiddemonstration.ViewModel.GalleryLiveData
 import net.geeksempire.simpleandroiddemonstration.databinding.WorkManagerViewBinding
 import java.io.File
+import java.nio.charset.Charset
 import java.util.*
 
 
@@ -27,7 +28,11 @@ class WorkManagerActivity : AppCompatActivity() {
         workManagerViewBinding = WorkManagerViewBinding.inflate(layoutInflater)
         setContentView(workManagerViewBinding.root)
 
-        val workRequestFirst = OneTimeWorkRequestBuilder<WorkBackgroundProcess>().build()
+        val workRequestFirst = OneTimeWorkRequestBuilder<WorkBackgroundProcess>()
+                .setInputData(workDataOf(
+                        "KEY" to "".toByteArray(Charset.defaultCharset())
+                ))
+                .build()
         //val workRequestSecond = OneTimeWorkRequestBuilder<WorkBackgroundProcess>().build()
         //val workRequestThird = OneTimeWorkRequestBuilder<WorkBackgroundProcess>().build()
 
@@ -41,7 +46,8 @@ class WorkManagerActivity : AppCompatActivity() {
         // then Enqueue the Network Request To Download File
         if (networkCheckpoint.networkConnection()) {
 
-            workManager.enqueue(workRequestFirst)
+            workManager
+                    .enqueue(workRequestFirst)
 
             /*workManager
                     .beginWith(listOf(workRequestFirst, workRequestSecond))
