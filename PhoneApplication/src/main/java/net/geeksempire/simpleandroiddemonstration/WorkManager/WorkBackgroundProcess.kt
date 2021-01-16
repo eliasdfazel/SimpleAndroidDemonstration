@@ -18,6 +18,9 @@ class WorkBackgroundProcess(appContext: Context, workerParams: WorkerParameters)
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
+        val getInputData = inputData
+        getInputData.getByteArray("KEY")//Convert To Whatever...
+
         val httpsRequests = HttpsRequests(applicationContext)
 
         val imageData = httpsRequests.downloadFileFromServer(
