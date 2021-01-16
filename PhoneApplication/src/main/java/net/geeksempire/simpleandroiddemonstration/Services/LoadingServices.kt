@@ -39,6 +39,8 @@ class LoadingServices : Service() {
                 //Send Broadcast Of Result with Extra Data
                 applicationContext.sendBroadcast(Intent().apply {
                     putExtra("Result", "Success")
+//                    putExtra("Result", "Success")
+//                    putExtra("Result", "Success")
                     action = "DataFromService"
                 })
 

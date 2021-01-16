@@ -47,6 +47,8 @@ class PlayWithServicesActivity : AppCompatActivity() {
         //Similar to Manifest Intent-Filter But We Can Define It Dynamically
         val intentFilter = IntentFilter()
         intentFilter.addAction("DataFromService")
+//        intentFilter.addAction("DataFromService")
+//        intentFilter.addAction("DataFromService")
         val broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
 
             override fun onReceive(context: Context?, intent: Intent?) {
