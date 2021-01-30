@@ -27,15 +27,13 @@ import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroun
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
-import net.geeksempire.simpleandroiddemonstration.PlayingWithJson.JsonParser
+import net.geeksempire.simpleandroiddemonstration.Network.HttpsRequests
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 import net.geeksempire.simpleandroiddemonstration.databinding.IconsShapesPreferencesBinding
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerInterface
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.SwipeGestureListener
-import java.net.URL
-import java.nio.charset.Charset
 
 class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataProcess, AfterBackgroundProcess {
 
@@ -92,19 +90,22 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
             //This is REST API
             //https://abanabsalan.com/wp-json/wp/v2/posts/4749
 
+            HttpsRequests(applicationContext)
+                .getJsonDataFromServer()
+
             //For Example Id Of Product -> 4749
-            val productId = 4749
-            CoroutineScope(Dispatchers.IO).launch {
-
-                val rawJsonData = URL("https://abanabsalan.com/wp-json/wp/v2/posts/${productId}")
-                    .readText(Charset.defaultCharset())
-                println(">>> " + rawJsonData)
-
-                val jsonParser = JsonParser()
-
-                jsonParser.prepareJsonData(rawJsonData)
-
-            }
+//            val productId = 4749
+//            CoroutineScope(Dispatchers.IO).launch {
+//
+//                val rawJsonData = URL("https://abanabsalan.com/wp-json/wp/v2/posts/${productId}")
+//                    .readText(Charset.defaultCharset())
+//                println(">>> " + rawJsonData)
+//
+//                val jsonParser = JsonParser()
+//
+//                jsonParser.prepareJsonData(rawJsonData)
+//
+//            }
 
 
             //startActivity(Intent(applicationContext, PlayWithServicesActivity::class.java))
