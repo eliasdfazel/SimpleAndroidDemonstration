@@ -57,12 +57,6 @@ class CoroutinesProcess {
 
             }
             .collect()
-//            .collect {//Foreground
-//                println(">>> ${it}")
-//
-//                emit(it)
-//
-//            }
 
     }
 
