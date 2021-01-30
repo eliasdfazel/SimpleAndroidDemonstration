@@ -23,11 +23,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassUserDataProcess
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroundProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
-import net.geeksempire.simpleandroiddemonstration.Network.HttpsRequests
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 import net.geeksempire.simpleandroiddemonstration.databinding.IconsShapesPreferencesBinding
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
@@ -87,11 +87,23 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         entryPointViewBinding.addNewUser.setOnClickListener {
 
+            CoroutineScope(Dispatchers.Main).async {
+
+                CoroutinesProcess()
+                    .testFlowOfData().collect {
+
+                        println(">>> Collected Data = " + it)
+
+
+                    }
+
+            }
+
             //This is REST API
             //https://abanabsalan.com/wp-json/wp/v2/posts/4749
 
-            HttpsRequests(applicationContext)
-                .getJsonDataFromServer()
+//            HttpsRequests(applicationContext)
+//                .getJsonDataFromServer()
 
             //For Example Id Of Product -> 4749
 //            val productId = 4749

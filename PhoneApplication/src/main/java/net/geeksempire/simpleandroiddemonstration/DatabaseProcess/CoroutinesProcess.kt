@@ -1,6 +1,7 @@
 package net.geeksempire.simpleandroiddemonstration.DatabaseProcess
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 class CoroutinesProcess {
 
@@ -33,6 +34,36 @@ class CoroutinesProcess {
         //
 
         "FinalResult"
+    }
+
+    fun testFlowOfData() = flow<String> {
+
+        arrayListOf<String>("1", "2", "", "3")
+            .asFlow()
+            .filter {
+
+                it.isNotEmpty()
+            }
+            .map {
+
+                val newText = it + " Extra Text"
+
+                emit(newText)
+            }
+            .onCompletion {//Foreground
+
+                //After Loop Finished
+                println(">>> Finished >> " + this)
+
+            }
+            .collect()
+//            .collect {//Foreground
+//                println(">>> ${it}")
+//
+//                emit(it)
+//
+//            }
+
     }
 
 }
