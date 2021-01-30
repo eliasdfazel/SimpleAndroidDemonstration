@@ -2,7 +2,7 @@ package net.geeksempire.simpleandroiddemonstration.PlayingWithRegex
 
 class RegexExtractor {
 
-    val normalText = "<b> Hi. Call This Girl <b> 001666111333 To Do Programming. </b>"
+    val normalText = "Hi. Call This Girl 202.55.0125 To Do Programming."
 
     fun doRegex() {
 
