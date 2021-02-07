@@ -26,5 +26,8 @@ data class DatabaseModel(
         @NonNull @ColumnInfo(name = "phoneNumber") var phoneNumber: String,
         @Nullable @ColumnInfo(name = "phoneCountryCode") var phoneCountryCode: String = "0098",
         @Nullable @ColumnInfo(name = "cityName") var cityName: String = "Mashhad",
-        @NonNull @ColumnInfo(name = "selectedItem") var selectedItem: Boolean = false
+        @NonNull @ColumnInfo(name = "selectedItem") var selectedItem: Boolean = false,
+
+        //0 = Female and 1 = Male
+        @NonNull @ColumnInfo(name = "sex") var sex: Int = 0
 )

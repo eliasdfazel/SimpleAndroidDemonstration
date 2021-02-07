@@ -20,6 +20,9 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.AllUsersAdapter
 import com.abanabsalan.aban.magazine.HomePageConfigurations.UI.Adapters.InstagramStoryHighlights.PassUserDataProcess
 import kotlinx.coroutines.*
@@ -29,6 +32,7 @@ import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProc
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 import net.geeksempire.simpleandroiddemonstration.databinding.IconsShapesPreferencesBinding
+import net.geekstools.floatshort.PRO.Widgets.RoomDatabase.DatabaseInterface
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerConstants
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerInterface
@@ -258,6 +262,31 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        //Call Migration Once.
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val databaseMigration = object : Migration(1, 2) {
+
+                override fun migrate(sqLiteDatabase: SupportSQLiteDatabase) {
+
+                    sqLiteDatabase
+                            .execSQL("ALTER TABLE WidgetData ADD COLUMN sex INTEGER NOT NULL DEFAULT 0")
+
+                }
+
+            }
+
+            val roomDatabase = Room.databaseBuilder(applicationContext, DatabaseInterface::class.java, "WidgetData")
+
+            roomDatabase.addMigrations(databaseMigration)
+
+        }
+
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onResume() {
         super.onResume()
@@ -435,6 +464,5 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         dialog.show()
     }
-
 
 }
