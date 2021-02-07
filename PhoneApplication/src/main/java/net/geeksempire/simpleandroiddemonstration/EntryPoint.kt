@@ -26,7 +26,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.AfterBackgroundProcess
 import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.CoroutinesProcess
-import net.geeksempire.simpleandroiddemonstration.DatabaseProcess.UserInformationProcess
 import net.geeksempire.simpleandroiddemonstration.Extensions.setupColorsOfViews
 import net.geeksempire.simpleandroiddemonstration.databinding.EntryPointViewBinding
 import net.geeksempire.simpleandroiddemonstration.databinding.IconsShapesPreferencesBinding
@@ -36,8 +35,6 @@ import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.GestureListenerInterfa
 import net.geekstools.supershortcuts.PRO.Utils.UI.Gesture.SwipeGestureListener
 
 class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataProcess, AfterBackgroundProcess {
-
-    val userInformationProcess: UserInformationProcess = UserInformationProcess()
 
     lateinit var allUsersAdapter: AllUsersAdapter
 
@@ -160,16 +157,16 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
         }
 
-        userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
+        (application as SimpleApplication).dependencyInjectionBuilder.userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
 
-        databaseSize = userInformationProcess.databaseSize(applicationContext)
+        databaseSize = (application as SimpleApplication).dependencyInjectionBuilder.userInformationProcess.databaseSize(applicationContext)
 
         entryPointViewBinding.searchView.setOnEditorActionListener { view, actionId, keyEvent ->
 
             when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
 
-                    val searchResult = userInformationProcess.searchInDatabase(applicationContext, view.text.toString())
+                    val searchResult = (application as SimpleApplication).dependencyInjectionBuilder.userInformationProcess.searchInDatabase(applicationContext, view.text.toString())
 
                     if (searchResult.isEmpty()) {
 
@@ -192,7 +189,7 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
             val fadeAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.down_up)
             entryPointViewBinding.searchAction.startAnimation(fadeAnimation)
 
-            val searchResult = userInformationProcess
+            val searchResult = (application as SimpleApplication).dependencyInjectionBuilder.userInformationProcess
                     .searchInDatabase(applicationContext, entryPointViewBinding.searchView.text.toString())
 
             if (searchResult.isEmpty()) {
@@ -265,9 +262,9 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
     override fun onResume() {
         super.onResume()
 
-        if (userInformationProcess.databaseSize(applicationContext) > databaseSize) {
+        if ((application as SimpleApplication).dependencyInjectionBuilder.userInformationProcess.databaseSize(applicationContext) > databaseSize) {
 
-            userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
+            (application as SimpleApplication).dependencyInjectionBuilder.userInformationProcess.setupAdapterData(this@EntryPoint, this@EntryPoint)
 
         }
 
@@ -367,12 +364,12 @@ class EntryPoint : AppCompatActivity(), GestureListenerInterface, PassUserDataPr
 
             allUsersAdapter.allUsersData.removeAt(specificDataPosition)
 
-            userInformationProcess.deleteSpecificData(applicationContext, specificDataKey)
+            (application as SimpleApplication).dependencyInjectionBuilder.userInformationProcess.deleteSpecificData(applicationContext, specificDataKey)
 
             allUsersAdapter.notifyItemRemoved(specificDataPosition)
             allUsersAdapter.notifyItemRangeChanged(specificDataPosition, allUsersAdapter.allUsersData.size)
 
-            databaseSize = userInformationProcess.databaseSize(applicationContext)
+            databaseSize = (application as SimpleApplication).dependencyInjectionBuilder.userInformationProcess.databaseSize(applicationContext)
 
             entryPointViewBinding.deleteView.visibility = View.INVISIBLE
 
